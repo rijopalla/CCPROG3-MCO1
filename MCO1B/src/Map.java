@@ -218,6 +218,10 @@ public class Map {
 		return characterSuperiority;
 	}
 	
+	private int getEnemySuperiority (Enemy[] enemyList) {
+		//TBA hehe
+	}
+	
 	public void adventure(Map map, Character char1, Character char2, Resource resourceNum) {
 		//TBA hehe
 		//Adventure variables
