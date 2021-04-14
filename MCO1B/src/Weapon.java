@@ -14,7 +14,7 @@ public class Weapon {
 		this.weaponPower = weapPower;
 		this.weaponRarity = weapRarity;
 		this.weaponLevel = 1;
-		
+	
 		switch(weapRarity) {
 		case 1:
 			this.weapRarityMultiplier = (float) 0.7;
@@ -39,7 +39,7 @@ public class Weapon {
 	}
 	
 	//Methods
-	public void weapLevelUp(Resource r, int input) {
+	public void weapLevelUp(Player r, int input) {
 		int i;
 		
 		//weapon levels up until loop reaches input

@@ -1,22 +1,28 @@
+import java.util.ArrayList;
+
 public class Map {
 	
 	//Properties
 	private String mapName;
-	private int mapBaseAmount;
-	private Enemy[] mapEnemyList;
+	private int baseAmount;
+	ArrayList<Enemy> enemyList =  new ArrayList<Enemy>();
 	
 	
 	//Constructor
 	public Map(String name, int amount) {
 		this.mapName = name;
-		this.mapBaseAmount = amount;
+		this.baseAmount = amount;
 	}
 	
 	//Methods
 	
 	//Getters
 	public int getBaseAmount() {
-		return this.mapBaseAmount;
+		return this.baseAmount;
+	}
+	
+	public String getMapName() {
+		return this.mapName;
 	}
 	
 	private float calculateTotalFinalWeaponPower(Weapon char1Weapon, Weapon char2Weapon) {
@@ -31,11 +37,11 @@ public class Map {
 		int weaponLevel1 = char1Weapon.getWeaponLevel();
 		int weaponLevel2 = char2Weapon.getWeaponLevel();
 		
-		float rarityMultiplier1 = char1Weapon.getWeapRarityMultiplier();
+		float rarityMultiplier1 = char1Weapon.getWeapRarityMultiplier(); 
 		float rarityMultiplier2 = char2Weapon.getWeapRarityMultiplier();
-		
-		finalWeaponPower1 = (float) weaponPower1 * rarityMultiplier1 + (float) weaponLevel1;
-		finalWeaponPower2 = (float) weaponPower2 * rarityMultiplier2 + (float) weaponLevel2;
+
+		finalWeaponPower1 = (float) weaponPower1 * rarityMultiplier1 + (float) weaponLevel1; //final weapon power formula
+		finalWeaponPower2 = (float) weaponPower2 * rarityMultiplier2 + (float) weaponLevel2; 
 		
 		totalFinalWeaponPower = finalWeaponPower1 + finalWeaponPower2;
 		
@@ -56,7 +62,7 @@ public class Map {
 		
 		charInfluence1 = (float) charLevel1 * (1 + ((charRarity1 - 1)/5));
 		charInfluence2 = (float) charLevel2 * (1 + ((charRarity2 - 1)/5));
-		
+
 		totalCharInfluence = charInfluence1 + charInfluence2;
 		
 		return totalCharInfluence;
@@ -76,9 +82,9 @@ public class Map {
 		float badPair = (float) -0.25;
 		
 		
-		if (charElement1.equalsIgnoreCase(charElement2)) //if elements are the same
+		if (charElement1.equals(charElement2)) //if elements are the same
 			multiplier = normalPair;
-		else if (charElement1.equalsIgnoreCase("joker")) { //if the first element is joker:
+		else if (charElement1.equals("joker")) { //if the first element is joker:
 			
 			switch (charElement2) {
 			case "trigger":
@@ -98,7 +104,7 @@ public class Map {
 				break;
 			}
 		}
-		else if (charElement1.equalsIgnoreCase("trigger")) { //if the first element is trigger:
+		else if (charElement1.equals("trigger")) { //if the first element is trigger:
 			
 			switch (charElement2) {
 			case "joker":
@@ -118,7 +124,7 @@ public class Map {
 				break;
 			}
 		}
-		else if (charElement1.equalsIgnoreCase("metal")) { //if the first element is metal:
+		else if (charElement1.equals("metal")) { //if the first element is metal:
 			
 			switch (charElement2) {
 			case "joker":
@@ -138,7 +144,7 @@ public class Map {
 				break;
 			}
 		}
-		else if (charElement1.equalsIgnoreCase("cyclone")) { //if the first element is cyclone:
+		else if (charElement1.equals("cyclone")) { //if the first element is cyclone:
 			
 			switch (charElement2) {
 			case "joker":
@@ -158,7 +164,7 @@ public class Map {
 				break;
 			}
 		}
-		else if (charElement1.equalsIgnoreCase("luna")) { //if the first element is luna:
+		else if (charElement1.equals("luna")) { //if the first element is luna:
 			
 			switch (charElement2) {
 			case "joker":
@@ -178,7 +184,7 @@ public class Map {
 				break;
 			}
 		}
-		else if (charElement1.equalsIgnoreCase("heat")) { //if the first element is heat:
+		else if (charElement1.equals("heat")) { //if the first element is heat:
 			
 			switch (charElement2) {
 			case "joker":
@@ -218,22 +224,44 @@ public class Map {
 		return characterSuperiority;
 	}
 	
-	private int getEnemySuperiority (Enemy[] enemyList) {
-		//TBA hehe
-	}
-	
-	public void adventure(Map map, Character char1, Character char2, Resource resourceNum) {
-		//TBA hehe
-		//Adventure variables
+	private int getEnemySuperiority (ArrayList<Enemy> enemyList) {
 		
-		float elementComboMultiplier;
-		float totalFinalWeaponPower;
-		float totalCharacterInfluence;
-		int   totalResource;
-		float characterSuperiority;
-		int   enemySuperiority;
+		int sum = 0;
+		
+		for (Enemy enemy : enemyList) 
+			sum += enemy.getEnemyPower();
+		
+		return sum;
 	}
 	
-
-
+	public int adventure(Map map, Character char1, Character char2) {
+		
+		float elementComboMultiplier = getElementComboMultiplier(char1, char2);
+		float totalFinalWeaponPower = calculateTotalFinalWeaponPower(char1.getCharacterWeapon(), char2.getCharacterWeapon());
+		float totalCharacterInfluence = calculateTotalCharacterInfluence(char1, char2);
+		float characterSuperiority = getCharacterSuperiority(char1, char2);
+		int   enemySuperiority = getEnemySuperiority(map.enemyList);
+		int   totalResource = 0;
+		
+		totalResource = (int)(map.baseAmount + (int)(totalFinalWeaponPower/24) * (int)(totalCharacterInfluence/36)  
+						* elementComboMultiplier );
+		
+		if (characterSuperiority > enemySuperiority) {
+			if (characterSuperiority >= 1.5 * enemySuperiority) {
+				char1.charLevelUp(2);
+				char2.charLevelUp(2);
+				System.out.println("Excellent adventure!");
+			}
+			else {
+				char1.charLevelUp(1);
+				char2.charLevelUp(1);
+				System.out.println("Successful adventure!");
+			}
+		}
+		else 
+			System.out.println("Failed adventure!");
+		
+		return totalResource;
+	}
+	
 }

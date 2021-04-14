@@ -14,21 +14,25 @@ public class Character {
 		this.characterElement = charElement;
 		this.characterLevel = 20;
 	}
-	
+
 	//Methods
-	public void charLevelUp(Resource r, int input) {
+	public void charLevelUp(Player player, int input) {
 		int i;
 		
 		for (i = 0; i < input; i++) {
 			
 			//character levels up until loop reaches input
 			//only levels up if resource amount > 0 and character level < max level (100)
-			if (r.getResourceAmount() > 0 && this.characterLevel <= 100) {
+			if (player.getResourceAmount() > 0 && this.characterLevel <= 100) {
 				this.characterLevel++;
-				r.subtractResource(1);
+				player.subtractResource(1);
 			}
 		}
 		
+	}
+	
+	public void charLevelUp(int num) {
+		this.characterLevel += num;
 	}
 	
 	public void weaponEquip(Weapon wep){
