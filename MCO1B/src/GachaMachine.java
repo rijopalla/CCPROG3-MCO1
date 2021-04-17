@@ -6,7 +6,7 @@ public class Random
 public class GachaMachine {
 	
 	//Properties 
-	int pull_chance; //for the pulling function
+	int pullRarity; //temporary value to passs arraylist index
 	Random roll = new Random; // for the pulling function
 	ArrayList<Character>characterList = new ArrayList<Character>(); //Arraylist of Objects
 	
@@ -54,7 +54,8 @@ public class GachaMachine {
 	//Methods
 	public void charSinglePull(Player player) {
 		subtractResource(300);
-		pull_chance = 
+		pullRarity = 1+roll.nextInt(10);  // chooses a random number from 1-10 in order to get rarity
+				
 		characterList.get(pull);
 		add
 	}
