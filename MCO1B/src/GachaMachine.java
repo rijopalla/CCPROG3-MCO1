@@ -7,11 +7,9 @@ public class GachaMachine {
 	float pullRarity; //temporary value for "chance" pull mechanic
 	int listIndex; 
 
-	Random roll = new Random; // for the pulling function
-	ArrayList<Character> characterList = new ArrayList<Character>(); //Arraylist of Objects
-	ArrayList<Weapon>weaponList = new ArrayList<Weapon>();
-	
-
+	Random roll = new Random; // variable "roll" for the randomizer in pulling mechanic
+	ArrayList<Character> characterList = new ArrayList<Character>(); //Arraylist of Character 
+	ArrayList<Weapon>weaponList = new ArrayList<Weapon>();//Arraylist of Weapons 
 	
 	//Constructor
 	public GachaMachine() {
@@ -41,7 +39,7 @@ public class GachaMachine {
 		characterList.add(new Character("Arthur",3,"Luna")); 
 		characterList.add(new Character("Hermes",3,"Heat"));
 		
-		
+
 		//Weapons
 		//1 star
 		weaponList.add(new Weapon("Knife ",130,1));
