@@ -5,7 +5,7 @@ public class Map {
 	//Properties
 	private String mapName;
 	private int baseAmount;
-	ArrayList<Enemy> enemyList =  new ArrayList<Enemy>();
+	ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 	
 	
 	//Constructor
@@ -38,13 +38,13 @@ public class Map {
 				enemyList.add(new Enemy("Faerie", 175));
 			}
 			
-			for (int i = 0; i < 2; i++) {
+			for (int i = 0; i < 2; i++) { //adds 2 elves
 				enemyList.add(new Enemy("Elf", 224));
 			}
 			
 			enemyList.add(new Enemy("Sorcerer", 313));
 			
-			this.baseAmount = 77;
+			this.baseAmount = 77; //map's base amount of resources
 		}
 		
 		//Sea of Hope
@@ -62,7 +62,7 @@ public class Map {
 				enemyList.add(new Enemy("Hydra", 360));
 			}
 			
-			this.baseAmount = 85;
+			this.baseAmount = 85; //map's base amt of resources
 		}
 		
 		//Tower of Ether
@@ -80,7 +80,7 @@ public class Map {
 				enemyList.add(new Enemy("Loki", 740)); 
 			}
 			
-			this.baseAmount = 91;
+			this.baseAmount = 91; //map's base amount of resources
 		}
 		
 		//Celestial Plane
@@ -94,16 +94,16 @@ public class Map {
 				enemyList.add(new Enemy("Hydra", 360));
 			}
 			
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 10; i++) { //adds 10 lokis
 				enemyList.add(new Enemy("Loki", 740));
 			}
 			
-			this.baseAmount = 100;
+			this.baseAmount = 100; //base amout of resources
 		}
 	}
 	
 	//Methods
-	
+
 	//Getters
 	public int getBaseAmount() {
 		return this.baseAmount;
