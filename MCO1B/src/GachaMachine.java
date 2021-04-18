@@ -52,7 +52,7 @@ public class GachaMachine {
 		
 		//2 star
 		weaponList.add(new Weapon("Circe Staff",150,2));
-		weaponList.add(new Weapon("Vorpal sword ",160,2));
+		weaponList.add(new Weapon("Vorpal sword",160,2));
 		weaponList.add(new Weapon("Merlin’s Staff",170,2));
 		weaponList.add(new Weapon("Five-cross Sword",180,2));
 		weaponList.add(new Weapon("Bashosen",190,2));
@@ -61,10 +61,10 @@ public class GachaMachine {
 		//3 star
 		weaponList.add(new Weapon("Philosopher’s stone",180,3));
 		weaponList.add(new Weapon("Magic Bullets ",190,3));
-		weaponList.add(new Weapon("Fragarach ",200,3));
+		weaponList.add(new Weapon("Fragarach",200,3));
 		weaponList.add(new Weapon("Honjo Masamune ",210,3));
 		weaponList.add(new Weapon("Excalibur ",220,3));
-		weaponList.add(new Weapon("Scythe of Father Time ",230,3)); 
+		weaponList.add(new Weapon("Scythe of Father Time",230,3)); 
 	}	
 	
 	
