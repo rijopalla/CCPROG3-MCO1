@@ -126,17 +126,10 @@ public class GachaMachine {
 			listIndex = 12 + roll.nextInt(5);  //Randomizes from index 12-17
 			Player.getPlayerWeapon.get(listIndex);		
 		}		
-	
-		player.subtractResource(300);
-		pullRarity = 1+roll.nextInt(10);  // chooses a random number from 1-10 in order to get rarity
-				
-		characterList.get(pull);
-		add
 	}
 	
 	public void weapMultiPull(Player player) {
 
-		
 		Player.subtractResource(2700);
 		
 		for (int i = 0; i < 9 ; i++) {  //Loops pulling 10 times
@@ -155,6 +148,4 @@ public class GachaMachine {
 			}
 		}
 	}
-	}
-
 }
