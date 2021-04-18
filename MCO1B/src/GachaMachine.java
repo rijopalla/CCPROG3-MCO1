@@ -1,13 +1,15 @@
 import java.util.Random;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Random
 
 public class GachaMachine {
 	
 	//Properties 
-	int pullRarity; //temporary value to passs arraylist index
-	Random roll = new Random; // for the pulling function
+	float pullRarity; //temporary value for "chance" pull mechanic
+	int listIndex; 
+	Random roll = new Random(); // for the pulling function
 	ArrayList<Character>characterList = new ArrayList<Character>(); //Arraylist of Objects
 	
 		characterList.add(new Character("Jekyll",1,"Joker"));
@@ -53,24 +55,84 @@ public class GachaMachine {
 	
 	//Methods
 	public void charSinglePull(Player player) {
-		subtractResource(300);
-		pullRarity = 1+roll.nextInt(10);  // chooses a random number from 1-10 in order to get rarity
-				
-		characterList.get(pull);
-		add
+		
+		Player.subtractResource(300);
+		
+		pullRarity = 1+roll.nextInt(10); // chooses a random number from 1-10 in order to get rarity
+				if (pullRarity >= 1 && pullRarity <= 5){//1-Rarity = 50% 
+					listIndex = roll.nextInt(5);  //Randomizes from index 0-5
+					Player.getPlayerCharacter.get(listIndex);		
+				}
+				else if (pullRarity > 5 && pullRarity <= 8.5){//2-Rarity = 35% 
+					listIndex = 6 + roll.nextInt(5);  //Randomizes from index 6-11
+					Player.getPlayerCharacter.get(listIndex);		
+				}
+				else if {//1-Rarity = 15% 
+					listIndex = 12 + roll.nextInt(5);  //Randomizes from index 12-17
+					Player.getPlayerCharacter.get(listIndex);		
+				}		
 	}
 	
 	public void charMultiPull(Player player) {
-		subtractResource(2700)
+		
+		Player.subtractResource(2700);
+		
+		for (int i = 0; i < 10 ; i++) {  //Loops pulling 10 times
+			pullRarity = 1+roll.nextInt(10);
+			if (pullRarity >= 1 && pullRarity <= 5){//1-Rarity = 50% 
+				listIndex = roll.nextInt(5);  //Randomizes from index 0-5
+				Player.getPlayerCharacter.get(listIndex);		
+			}
+			else if (pullRarity > 5 && pullRarity <= 8.5){//2-Rarity = 35% 
+				listIndex = 6 + roll.nextInt(5);  //Randomizes from index 6-11
+				Player.getPlayerCharacter.get(listIndex);		
+			}
+			else {//3-Rarity = 15% 
+				listIndex = 12 + roll.nextInt(5);  //Randomizes from index 12-17
+				Player.getPlayerCharacter.get(listIndex);		
+			}
+		}
 	}
 	
 	public void weapSinglePull(Player player) {
-		subtractResource(300)
+		
+		Player.subtractResource(300);
+		
+		pullRarity = 1+roll.nextInt(10); // chooses a random number from 1-10 in order to get rarity
+		if (pullRarity >= 1 && pullRarity <= 5){//1-Rarity = 50% 
+			listIndex = roll.nextInt(5);  //Randomizes from index 0-5
+			Player.getPlayerWeapon.get(listIndex);		
+		}
+		else if (pullRarity > 5 && pullRarity <= 8.5){//2-Rarity = 35% 
+			listIndex = 6 + roll.nextInt(5);  //Randomizes from index 6-11
+			Player.getPlayerWeapon.get(listIndex);		
+		}
+		else if {//1-Rarity = 15% 
+			listIndex = 12 + roll.nextInt(5);  //Randomizes from index 12-17
+			Player.getPlayerWeapon.get(listIndex);		
+		}		
+	
 	}
+	
 	
 	public void weapMultiPull(Player player) {
-		subtractResource(2700)
-		return 
+		
+		Player.subtractResource(2700);
+		
+		for (int i = 0; i < 10 ; i++) {  //Loops pulling 10 times
+			pullRarity = 1+roll.nextInt(10);
+			if (pullRarity >= 1 && pullRarity <= 5){//1-Rarity = 50% 
+				listIndex = roll.nextInt(5);  //Randomizes from index 0-5
+				Player.getPlayerWeapon.get(listIndex);		
+			}
+			else if (pullRarity > 5 && pullRarity <= 8.5){//2-Rarity = 35% 
+				listIndex = 6 + roll.nextInt(5);  //Randomizes from index 6-11
+				Player.getPlayerWeapon.get(listIndex);		
+			}
+			else {//3-Rarity = 15% 
+				listIndex = 12 + roll.nextInt(5);  //Randomizes from index 12-17
+				Player.getPlayerWeapon.get(listIndex);		
+			}
+		}
 	}
-	
 }
