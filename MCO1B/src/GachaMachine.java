@@ -62,7 +62,7 @@ public class GachaMachine {
 		weaponList.add(new Weapon("Magic Bullets ",190,3));
 		weaponList.add(new Weapon("Fragarach",200,3));
 		weaponList.add(new Weapon("Honjo Masamune ",210,3));
-		weaponList.add(new Weapon("Excalibur ",220,3));
+		weaponList.add(new Weapon("Excalibur",220,3));
 		weaponList.add(new Weapon("Scythe of Father Time",230,3)); 
 	}	
 	
@@ -127,7 +127,6 @@ public class GachaMachine {
 	}
 	
 	public void weapMultiPull(Player player) {
-
 		Player.subtractResource(2700);
 		
 		for (int i = 0; i < 9 ; i++) {  //Loops pulling 10 times

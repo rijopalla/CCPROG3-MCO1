@@ -5,17 +5,105 @@ public class Map {
 	//Properties
 	private String mapName;
 	private int baseAmount;
-	ArrayList<Enemy> enemyList =  new ArrayList<Enemy>();
+	ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 	
 	
 	//Constructor
-	public Map(String name, int amount) {
+	public Map(String name) {
+	
 		this.mapName = name;
-		this.baseAmount = amount;
+		
+		//generating enemy list per map
+		//Underground Caverns
+		if (this.mapName.equalsIgnoreCase("underground caverns")){
+			enemyList.add(new Enemy("Elf", 224)); //adds 1 elf
+			
+			for (int i = 0; i < 6; i++) {
+				enemyList.add(new Enemy("Slime", 73)); //adds 6 slimes
+			}
+			
+			this.baseAmount = 53; //map's base amount of resources
+		}
+		
+		//Forest of Enchantments
+		if (this.mapName.equalsIgnoreCase("forest of enchantments")){
+			
+			for (int i = 0; i < 5; i++) { //adds 5 slimes and orcs
+				enemyList.add(new Enemy("Slime", 73)); 
+				enemyList.add(new Enemy("Orc", 84));
+			}
+			
+			for (int i = 0; i < 3; i++) { //adds 3 familiars and fairies
+				enemyList.add(new Enemy("Familiar", 144));
+				enemyList.add(new Enemy("Faerie", 175));
+			}
+			
+			for (int i = 0; i < 2; i++) { //adds 2 elves
+				enemyList.add(new Enemy("Elf", 224));
+			}
+			
+			enemyList.add(new Enemy("Sorcerer", 313));
+			
+			this.baseAmount = 77; //map's base amount of resources
+		}
+		
+		//Sea of Hope
+		if (this.mapName.equalsIgnoreCase("sea of hope")) {
+			
+			for (int i = 0; i < 75; i++) { //adds 75 slimes
+				enemyList.add(new Enemy("Slime", 73));
+			}
+			
+			for (int i = 0; i < 20; i++) { //adds 20 sorcerers
+				enemyList.add(new Enemy("Sorcerer", 313));
+			}
+			
+			for (int i = 0; i < 5; i++) { //adds 5 hydras
+				enemyList.add(new Enemy("Hydra", 360));
+			}
+			
+			this.baseAmount = 85; //map's base amt of resources
+		}
+		
+		//Tower of Ether
+		if (this.mapName.equalsIgnoreCase("tower of ether")) {
+			
+			for (int i = 0; i < 20; i++) { //adds 20 basilisks
+				enemyList.add(new Enemy("Basilisk", 499));
+			}
+			
+			for (int i = 0; i < 7; i++) { //adds 7 harpies
+				enemyList.add(new Enemy("Harpy", 639));
+			}
+			
+			for (int i = 0; i < 5; i++) { //adds 5 lokis
+				enemyList.add(new Enemy("Loki", 740)); 
+			}
+			
+			this.baseAmount = 91; //map's base amount of resources
+		}
+		
+		//Celestial Plane
+		if (this.mapName.equalsIgnoreCase("celestial plane")) {
+			
+			for (int i = 0; i < 50; i++) { //adds 50 faries
+				enemyList.add(new Enemy("Faerie", 175));
+			}
+			
+			for (int i = 0; i < 20; i++) { //adds 20 hydras
+				enemyList.add(new Enemy("Hydra", 360));
+			}
+			
+			for (int i = 0; i < 10; i++) { //adds 10 lokis
+				enemyList.add(new Enemy("Loki", 740));
+			}
+			
+			this.baseAmount = 100; //base amout of resources
+		}
 	}
 	
 	//Methods
-	
+
 	//Getters
 	public int getBaseAmount() {
 		return this.baseAmount;
@@ -224,11 +312,11 @@ public class Map {
 		return characterSuperiority;
 	}
 	
-	private int getEnemySuperiority (ArrayList<Enemy> enemyList) {
+	private int getEnemySuperiority (ArrayList<Enemy> enemyList) { 
 		
 		int sum = 0;
 		
-		for (Enemy enemy : enemyList) 
+		for (Enemy enemy : enemyList) //goes through every enemy in list and adds power
 			sum += enemy.getEnemyPower();
 		
 		return sum;
@@ -244,7 +332,7 @@ public class Map {
 		int   totalResource = 0;
 		
 		totalResource = (int)(map.baseAmount + (int)(totalFinalWeaponPower/24) * (int)(totalCharacterInfluence/36)  
-						* elementComboMultiplier );
+						* elementComboMultiplier);
 		
 		if (characterSuperiority > enemySuperiority) {
 			if (characterSuperiority >= 1.5 * enemySuperiority) {
