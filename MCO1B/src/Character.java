@@ -43,15 +43,30 @@ public class Character {
 		this.characterWeapon = wep;
 		wep.setWeaponOwner(this);
 	}
-	
-	public void mergeChar(Character baseChar, Character char2, Character char3) {
-		//TBA hehe
-	}
-	
+		
 	public void weaponUnequip() {
 		if (this.getCharacterWeapon() != null) //if character has a currently equipped weapon 
 			this.getCharacterWeapon().setWeaponOwner(null);
 			this.characterWeapon = null; //remove equipped weapon
+	}
+	
+	public void mergeChar(Character baseChar, Character char2, Character char3) {
+		if (baseChar.equals(char2.getCharacterRarity()) && char2.equals(char3.getCharacterRarity()) 
+		   && baseChar.equals(char2.getCharacterName()) && char2.equals(char3.getCharacterName()))  { //uses Equals() class to compare internal value
+			
+			if (baseChar.getCharacterWeapon()!=null || char2.getCharacterWeapon()!=null) { //checks if baseChar or char2 has weapons equipped
+				baseChar.weaponUnequip();
+				char2.weaponUnequip();
+				}
+		
+			if (char3.characterRarity != 3) {  // checks if Rarity is not maxed;
+				char3.characterRarity =+ 1; //adds 1 rarity to Character
+				}
+		
+			baseChar = null; // Deletes baseChar
+			char2 = null; //deletes Char2
+			}
+		}else system.out.println("Can not be merged!");
 	}
 	
 	//Getters
