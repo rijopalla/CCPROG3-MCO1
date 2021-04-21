@@ -55,8 +55,36 @@ public class Weapon {
 		
 	}
 	
-	public void mergeWeap(Weapon baseWeap, Weapon weapon2, Weapon weapon3) {
-		//TBA 
+	public void mergeWeap(Weapon weapon1, Weapon weapon2) {
+		/*mergeWeapon() takes two other weapons and merges them into the weapon
+		* that's calling the method
+		*/
+		
+		//1. check if all weapons have the same name
+		if (this.weaponName.equals(weapon1.getWeaponName()) && this.weaponName.equals(weapon2.getWeaponName())) {
+			//2. check if all weapons have the same rarity
+			if (this.weaponRarity == weapon1.getWeaponRarity() ) {
+				
+				//a. if weapon1 and weapon2 are equipped, unequip them from their characters first before merging
+				if (weapon1.getWeaponOwner() != null || weapon2.getWeaponOwner() != null) {
+					weapon1.weaponOwner = null;
+					weapon2.weaponOwner = null;
+				}
+				
+				//3. merge weapons
+				if (this.weaponRarity < 5) {
+					this.weaponRarity++;
+					weapon1 = null; //deletes weapon1
+					weapon2 = null; //deletes weapon2
+				}
+				else
+					System.out.println("Cannot be merged! Weapon is already at maximum rarity!"); //print error message when weapon's rarity is already 5
+			}
+			else
+				System.out.println("Cannot be merged! Weapons must have the same rarity!"); //print error message when weapons don't have the same rarity
+		}
+		else
+			System.out.println("Cannot be merged! Weapons must have the same name!"); //print error message when weapons don't have the same name
 	}
 	
 	//Getters
