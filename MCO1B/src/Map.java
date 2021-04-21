@@ -98,7 +98,7 @@ public class Map {
 				enemyList.add(new Enemy("Loki", 740));
 			}
 			
-			this.baseAmount = 100; //base amout of resources
+			this.baseAmount = 100; //base amount of resources
 		}
 	}
 	
@@ -128,9 +128,11 @@ public class Map {
 		float rarityMultiplier1 = char1Weapon.getWeapRarityMultiplier(); 
 		float rarityMultiplier2 = char2Weapon.getWeapRarityMultiplier();
 
-		finalWeaponPower1 = (float) weaponPower1 * rarityMultiplier1 + (float) weaponLevel1; //final weapon power formula
+		//calculate final weapon power based on formula:
+		finalWeaponPower1 = (float) weaponPower1 * rarityMultiplier1 + (float) weaponLevel1; 
 		finalWeaponPower2 = (float) weaponPower2 * rarityMultiplier2 + (float) weaponLevel2; 
 		
+		//add the two weapon power variables to get total final weapon power
 		totalFinalWeaponPower = finalWeaponPower1 + finalWeaponPower2;
 		
 		return totalFinalWeaponPower;
@@ -170,8 +172,8 @@ public class Map {
 		float badPair = (float) -0.25;
 		
 		
-		if (charElement1.equals(charElement2)) //if elements are the same
-			multiplier = normalPair;
+		if (charElement1.equals(charElement2)) //if elements are the same:
+			multiplier = normalPair;			
 		else if (charElement1.equals("joker")) { //if the first element is joker:
 			
 			switch (charElement2) {
@@ -235,8 +237,8 @@ public class Map {
 		else if (charElement1.equals("cyclone")) { //if the first element is cyclone:
 			
 			switch (charElement2) {
-			case "joker":
-				multiplier = decentPair;
+			case "joker": 
+				multiplier = decentPair; 
 				break;
 			case "trigger":
 				multiplier = decentPair;
@@ -301,7 +303,7 @@ public class Map {
 										
 		//calculate total final weapon power
 		float totalFinalWeaponPower = this.calculateTotalFinalWeaponPower(char1.getCharacterWeapon(),
-									  char2.getCharacterWeapon()); //assumes char1 and 2 already have a weapon equipped
+									  char2.getCharacterWeapon()); //assumes char1 and char2 already have a weapon equipped
 		
 		//calculate total char influence
 		float totalCharacterInfluence = this.calculateTotalCharacterInfluence(char1, char2);
@@ -332,16 +334,18 @@ public class Map {
 		int   totalResource = 0;
 		
 		totalResource = (int)(map.baseAmount + (int)(totalFinalWeaponPower/24) * (int)(totalCharacterInfluence/36)  
-						* elementComboMultiplier);
+						* elementComboMultiplier); //calculate total resources the player would get (based on formula given in the specs)
 		
+		//check if character superiority is greater than enemy superiority
 		if (characterSuperiority > enemySuperiority) {
+			//if character superiority is at least greater than 50% of enemy superiority
 			if (characterSuperiority >= 1.5 * enemySuperiority) {
-				char1.charLevelUp(2);
+				char1.charLevelUp(2); //characters level up by 2
 				char2.charLevelUp(2);
-				System.out.println("Excellent adventure!");
+				System.out.println("Excellent adventure!"); //print excellent adventure
 			}
-			else {
-				char1.charLevelUp(1);
+			else { //successful adventure
+				char1.charLevelUp(1); //characters only level up by 1
 				char2.charLevelUp(1);
 				System.out.println("Successful adventure!");
 			}
