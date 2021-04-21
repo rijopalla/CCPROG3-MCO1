@@ -31,8 +31,10 @@ public class Character {
 		
 	}
 	
-	public void charLevelUp(int num) {
-		this.characterLevel += num;
+	public void charLevelUp(int num) { //override method; this levelUp method only takes an int and increases character's level based on parameter
+		
+		if (this.getCharacterLevel() <= 100) //if character's level <= 100:
+			this.characterLevel += num; 	 //add num to level
 	}
 	
 	public void weaponEquip(Weapon wep){
@@ -50,24 +52,42 @@ public class Character {
 			this.characterWeapon = null; //remove equipped weapon
 	}
 	
-	public void mergeChar(Character baseChar, Character char2, Character char3) {
-		if (baseChar.equals(char2.getCharacterRarity()) && char2.equals(char3.getCharacterRarity()) 
-		   && baseChar.equals(char2.getCharacterName()) && char2.equals(char3.getCharacterName()))  { //uses Equals() class to compare internal value
+	public void mergeChar(Character char1, Character char2) {
+		/*mergeCharacter() takes two other characters and merges them into the character
+		* that's calling the method
+		*/
+		
+		//baseCharacter = this character
+		
+		//1. check if all characters have the same name
+		if (this.characterName.equals(char1.getCharacterName()) && this.characterName.equals(char2.getCharacterName())) {
 			
-			if (baseChar.getCharacterWeapon()!=null || char2.getCharacterWeapon()!=null) { //checks if baseChar or char2 has weapons equipped
-				baseChar.weaponUnequip();
-				char2.weaponUnequip();
+			//2. check if all characters have the same rarity
+			if (this.characterRarity == char1.getCharacterRarity() && this.characterRarity == char2.getCharacterRarity()) {
+				
+				//a. if char1 and char2 have weapons equipped, unequip their weapons first before merging
+				if (char1.getCharacterWeapon() != null || char2.getCharacterWeapon() != null) {
+					char1.weaponUnequip();
+					char2.weaponUnequip();
 				}
-		
-			if (char3.characterRarity != 3) {  // checks if Rarity is not maxed;
-				char3.characterRarity =+ 1; //adds 1 rarity to Character
+				
+				//3. merge characters
+				if (this.characterRarity < 5) { //checks if Rarity is not maxed (character rarity would have to be 1-4)
+					this.characterRarity++; //adds +1 rarity to character
+					char1 = null; //delete char 1
+					char2 = null; //delete char 2
 				}
-		
-			baseChar = null; // Deletes baseChar
-			char2 = null; //deletes Char2
+				else
+					System.out.println("Cannot be merged! Character is already at maximum rarity"); //print error message when character's rarity is already 5
 			}
-		}else system.out.println("Can not be merged!");
+			else
+				System.out.println("Cannot be merged! Characters must have the same rarity!"); //print error message when characters don't have the same rarity
+		}
+		else
+			System.out.println("Cannot be merged! Characters must have the same name!"); //print error message when characters don't have the same name
+			
 	}
+	
 	
 	//Getters
 	public String getCharacterName() {
