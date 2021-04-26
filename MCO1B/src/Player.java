@@ -2,13 +2,19 @@ import java.util.ArrayList;
 
 public class Player {
 
-	//Behaviors
+	//Properties
+	private String playerName; //user defined name
 	ArrayList<Character> characterInventory = new ArrayList<Character>(); //array list of characters
 	ArrayList<Weapon>    weaponInventory = new ArrayList<Weapon>();   //array list of weapons
-	private int resourceAmount = 0;
+	private int resourceAmount; //stores player's resources
+	
+	//Constructor
+	public Player(String inputName) {
+		this.playerName = inputName;
+		this.resourceAmount = 5400; //player starts with enough resources for 1 multi-pull for characters and weapons
+	}
 	
 	//Methods
-	
 	public Character getPlayerCharacter(int index) {
 		return this.characterInventory.get(index);
 	}
@@ -37,6 +43,10 @@ public class Player {
 	
 	public int getResourceAmount() {
 		return this.resourceAmount;
+	}
+	
+	public String getPlayerName() {
+		return this.playerName;
 	}
 	
 }
