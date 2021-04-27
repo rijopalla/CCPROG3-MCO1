@@ -6,7 +6,7 @@ public class Weapon {
 	private int weaponRarity;  //Rarity
 	private int weaponLevel;   //Level
 	private Character weaponOwner; //stores which character the weapon is equipped to
-	private float weapRarityMultiplier;
+	private float weapRarityMultiplier; //stores weapon rarity multiplier
 	
 	//Constructor
 	public Weapon(String weapName, int weapPower, int weapRarity) {
@@ -39,18 +39,16 @@ public class Weapon {
 	}
 	
 	//Methods
-	public void weapLevelUp(Player r, int input) {
-		int i;
+	public void weapLevelUp(int resourceNum) {
+		//takes the allotted resources as an input
+		//TODO: make sure that resourceNum is subtracted to the player's no. of resources in driver class
 		
-		//weapon levels up until loop reaches input
-		//only levels up if resource amount > 0 and character level < max level (100)
-		
-		for (i = 0; i < input; i++) {
+		//weapon only levels up if resource amount > 0 and weapon's level < max level (50)
+		if (resourceNum > 0 && this.weaponLevel < 50) {
 			
-			if (r.getResourceAmount() > 0 && this.weaponLevel <= 100) {
+			//character levels up until loop reaches input
+			for (int i = 0; i < resourceNum; i++) 
 				this.weaponLevel++;
-				r.subtractResource(1);
-			}
 		}
 		
 	}
