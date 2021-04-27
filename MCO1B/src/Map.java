@@ -314,11 +314,11 @@ public class Map {
 		return characterSuperiority;
 	}
 	
-	private int getEnemySuperiority (ArrayList<Enemy> enemyList) { 
+	private int getEnemySuperiority () { 
 		
 		int sum = 0;
 		
-		for (Enemy enemy : enemyList) //goes through every enemy in list and adds power
+		for (Enemy enemy : this.enemyList) //goes through every enemy in list and adds power
 			sum += enemy.getEnemyPower();
 		
 		return sum;
@@ -330,7 +330,7 @@ public class Map {
 		float totalFinalWeaponPower = calculateTotalFinalWeaponPower(char1.getCharacterWeapon(), char2.getCharacterWeapon());
 		float totalCharacterInfluence = calculateTotalCharacterInfluence(char1, char2);
 		float characterSuperiority = getCharacterSuperiority(char1, char2);
-		int   enemySuperiority = getEnemySuperiority(map.enemyList);
+		int   enemySuperiority = getEnemySuperiority();
 		int   totalResource = 0;
 		
 		totalResource = (int)(map.baseAmount + (int)(totalFinalWeaponPower/24) * (int)(totalCharacterInfluence/36)  
