@@ -53,14 +53,10 @@ public class Player {
 		
 		//prints out every character the player currently has
 		System.out.println("Character: ");
-		for (Character chara: this.characterInventory) {
-			System.out.println(chara.toString());
-		}
+
 		
 		//prints out every weapon the player currently has
 		System.out.println("Weapon: ");
-		for (Weapon weap: this.weaponInventory) {
-			System.out.println(weap.toString());
-		}
+		
 	}
 }
