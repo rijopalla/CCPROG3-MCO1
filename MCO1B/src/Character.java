@@ -16,25 +16,18 @@ public class Character {
 	}
 
 	//Methods
-	public void charLevelUp(Player player, int input) {
-		int i;
+	public void charLevelUp(int resourceNum) {
+		//takes the allotted resources as an input
+		//TODO: make sure that resourceNum is subtracted to the player's no. of resources in driver class
 		
-		for (i = 0; i < input; i++) {
+		//character only levels up if resource amount > 0 and character level < max level (100)
+		if (resourceNum > 0 && this.characterLevel < 100) {
 			
 			//character levels up until loop reaches input
-			//only levels up if resource amount > 0 and character level < max level (100)
-			if (player.getResourceAmount() > 0 && this.characterLevel <= 100) {
+			for (int i = 0; i < resourceNum; i++) 
 				this.characterLevel++;
-				player.subtractResource(1);
-			}
 		}
 		
-	}
-	
-	public void charLevelUp(int num) { //override method; this levelUp method only takes an int and increases character's level based on parameter
-		
-		if (this.getCharacterLevel() <= 100) //if character's level <= 100:
-			this.characterLevel += num; 	 //add num to level
 	}
 	
 	public void weaponEquip(Weapon wep){
@@ -48,7 +41,7 @@ public class Character {
 		
 	public void weaponUnequip() {
 		if (this.getCharacterWeapon() != null) //if character has a currently equipped weapon 
-			this.getCharacterWeapon().setWeaponOwner(null);
+			this.getCharacterWeapon().setWeaponOwner(null); 
 			this.characterWeapon = null; //remove equipped weapon
 	}
 	
@@ -87,7 +80,6 @@ public class Character {
 			System.out.println("Cannot be merged! Characters must have the same name!"); //print error message when characters don't have the same name
 			
 	}
-	
 	
 	//Getters
 	public String getCharacterName() {
