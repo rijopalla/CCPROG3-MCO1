@@ -6,8 +6,8 @@ public class Enemy {
 	
 	//Constructor
 	public Enemy(String name, int power) {
-		this.setEnemyName(name);
-		this.setEnemyPower(power);
+		this.enemyName = name;
+		this.enemyPower = power;
 	}
 	
 	//Methods
@@ -21,13 +21,4 @@ public class Enemy {
 		return this.enemyPower; 
 	}
 	
-	//Setters
-	public void setEnemyName(String name) {
-		this.enemyName = name;
-	}
-	
-	public void setEnemyPower(int power) {
-		this.enemyPower = power;
-	}
-
 }
