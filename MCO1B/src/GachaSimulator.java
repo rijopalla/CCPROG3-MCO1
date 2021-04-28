@@ -26,9 +26,10 @@ public class GachaSimulator {
 		System.out.printf("Hello %s!\n", player.getPlayerName());
 		System.out.println("Before you start adventuring, you'll need characters and weapons!");
 		System.out.println("Fortunately for you, you already start with 10 of each!");
+		System.out.println("Here are the characters and weapons you currently have: ");
 		
-		
-		//TODO: Display player inventory (both character & weapons)
+		//Display player inventory (both character & weapons)
+		player.displayInventory();
 		
 		//TODO: ask player what they want to do next (Manage characters/weapons [this includes merging characters/weap, level up, equip/unequip], or go on an adventure)
 		//TODO: implement main loop
