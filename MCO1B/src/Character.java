@@ -37,6 +37,7 @@ public class Character {
 		
 		this.characterWeapon = wep;
 		wep.setWeaponOwner(this);
+		wep.setIsEquipped(true);
 	}
 		
 	public void weaponUnequip() {
