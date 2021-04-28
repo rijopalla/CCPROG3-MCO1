@@ -15,6 +15,7 @@ public class Weapon {
 		this.weaponPower = weapPower;
 		this.weaponRarity = weapRarity;
 		this.weaponLevel = 1;
+		this.isEquipped = false;
 	
 		switch(weapRarity) {
 		case 1:
