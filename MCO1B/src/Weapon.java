@@ -6,6 +6,7 @@ public class Weapon {
 	private int weaponRarity;  //Rarity
 	private int weaponLevel;   //Level
 	private Character weaponOwner; //stores which character the weapon is equipped to
+	private boolean isEquipped; //determines if the weapon is equipped to a character or not
 	private float weapRarityMultiplier; //stores weapon rarity multiplier
 	
 	//Constructor
@@ -110,9 +111,17 @@ public class Weapon {
 		return this.weapRarityMultiplier;
 	}
 	
+	public boolean isEquipped() {
+		return this.isEquipped;
+	}
+	
 	//Setters
 	public void setWeaponOwner(Character chara) {
 		this.weaponOwner = chara;
+	}
+	
+	public void setIsEquipped(boolean equipCheck) {
+		this.isEquipped = equipCheck;
 	}
 
 }
