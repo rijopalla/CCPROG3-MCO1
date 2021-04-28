@@ -7,6 +7,7 @@ public class GachaSimulator {
 		
 		Scanner stringInput = new Scanner(System.in); //takes strings as inputs
 		Scanner numInput    = new Scanner(System.in); //takes integers as inputs
+		int userChoice; // int variable for user actions 
 		
 		//Intro message
 		System.out.println("Welcome to the Gacha Simulator!");
@@ -20,8 +21,10 @@ public class GachaSimulator {
 		GachaMachine machine = new GachaMachine(); //create new gacha machine object
 		
 		//TODO: Perform 1 multiroll for characters, store it to player inventory
+		machine.charMultiPull();
 		
 		//TODO: Perform 1 multiroll for weapons, store it to player inventory
+		machine.weapSinglePull();  
 		
 		System.out.printf("Hello %s!\n", player.getPlayerName());
 		System.out.println("Before you start adventuring, you'll need characters and weapons!");
@@ -31,8 +34,18 @@ public class GachaSimulator {
 		//Display player inventory (both character & weapons)
 		player.displayInventory();
 		
+		
 		//TODO: ask player what they want to do next (Manage characters/weapons [this includes merging characters/weap, level up, equip/unequip], or go on an adventure)
 		//TODO: implement main loop
+		System.out.println("What action do you want do to next?(Enter 1 or 2)");
+		System.out.println("1. Go on an adventure");
+		System.out.println("2. Manage Characters/Weapons");
+		userChoice = numInput.nextInt();  //asks for User's choice
+			if (userChoice == 1) {
+				//TODO: adventures here
+			}
+			else //TODO: More options for managing characters /weapon 
+		
 	}
 
 }
