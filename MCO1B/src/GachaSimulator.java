@@ -81,7 +81,7 @@ public class GachaSimulator {
 				
 				int mapChoice = Integer.parseInt(input.nextLine());
 				
-				switch(userChoice) {
+				switch(mapChoice) {
 				case 0: //underground caverns
 					//player gets resources from the map and the total no. of resources is increased
 					player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
