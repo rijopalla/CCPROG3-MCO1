@@ -48,7 +48,7 @@ public class Player {
 		return this.playerName;
 	}
 	
-	public void displayInventory() {
+	public void displayCharInventory() {
 		//displayInventory() shows every character and weapon the player has and shows some details
 		
 		System.out.println("Inventory:");
@@ -65,10 +65,12 @@ public class Player {
 		
 		System.out.printf("\n");
 		
-		System.out.println("Weapon: ");
+   }
+	
+	public void displayWeaponInventory() {
+		System.out.println("Weapon Inventory: ");
 		
 		for (int i = 0; i < this.weaponInventory.size(); i++) {
-			
 			if (this.weaponInventory.get(i).isEquipped()) { //if the weapon is currently equipped on a character:
 				//print the weapon's index, name, power, rarity, level, and the name of the character it is currently equipped to
 				System.out.printf("[%d] Name: %s Power: %d Rarity: %d Level %d Equipped on: %s", i, this.weaponInventory.get(i).getWeaponName(),
@@ -77,10 +79,11 @@ public class Player {
 			}
 			else {
 				//else, print the above details w/o the weapon's owner
-				System.out.printf("[%d] Name: %s Power: %d Rarity: %d Level %d\n", i, this.weaponInventory.get(i).getWeaponName(), this.weaponInventory.get(i).getWeaponPower(), 
-									this.weaponInventory.get(i).getWeaponRarity(), this.weaponInventory.get(i).getWeaponLevel());
+				System.out.printf("[%d] Name: %s Power: %d Rarity: %d Level %d\n", i, this.weaponInventory.get(i).getWeaponName(), this.weaponInventory.get(i).getWeaponPower(),
+						this.weaponInventory.get(i).getWeaponRarity(), this.weaponInventory.get(i).getWeaponLevel());
 			}
+			
 		}
-   }
+	}
 		
 }
