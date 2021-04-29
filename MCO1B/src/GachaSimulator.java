@@ -1,5 +1,6 @@
 // main/driver class
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class GachaSimulator {
 
@@ -9,6 +10,14 @@ public class GachaSimulator {
 		Scanner numInput    = new Scanner(System.in); //takes integers as inputs
 		int userChoice; // int variable for user actions 
 		boolean isActive = true; //used in main loop
+		
+		//Maps
+		ArrayList<Map> mapList = new ArrayList<Map>(); //stores the different maps
+		mapList.add(new Map("underground caverns"));
+		mapList.add(new Map("forest of enchantments"));
+		mapList.add(new Map("sea of hope"));
+		mapList.add(new Map("tower of ether"));
+		mapList.add(new Map("celestial plane"));
 		
 		//Intro message
 		System.out.println("Welcome to the Gacha Simulator!");
@@ -54,6 +63,7 @@ public class GachaSimulator {
 			
 			if (userChoice == 1) {
 				//TODO:adventures here
+				System.out.println("-----------Adventure-----------");
 			}
 			else {
 				//TODO: More options for managing characters/weapon
