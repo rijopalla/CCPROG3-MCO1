@@ -6,7 +6,7 @@ public class GachaSimulator {
 
 	public static void main(String[] args) {
 		
-		Scanner input = new Scanner(System.in); //scanner variable that takes user inputs
+		Scanner input = new Scanner(System.in); //scanner variable that takes string inputs
 		int userChoice; // int variable for user actions 
 		boolean isActive = true; //used in main loop
 		
@@ -57,28 +57,21 @@ public class GachaSimulator {
 			System.out.println("What action do you want do to next?(Enter 1 or 2)");
 			System.out.println("1. Go on an adventure");
 			System.out.println("2. Manage Characters/Weapons");
-			userChoice = input.nextInt();
+			userChoice = Integer.parseInt(input.nextLine());
 			
 			if (userChoice == 1) {
 				System.out.println("-----------Adventure-----------");
 				System.out.println("Select two characters: ");
 				
-				//int variables that store the index of chosen character (based on user input):
-				int charIndex1 = 0;
-				int charIndex2 = 0;
+				//Show player's character inventory
+				player.displayCharInventory();
 				
-				for (int i = 0; i < 2; i++) {
+				//int variables that store the index of chosen character (based on user input):
+				int charIndex1 = Integer.parseInt(input.nextLine());
+				int charIndex2 = Integer.parseInt(input.nextLine());
 					
-					player.displayCharInventory();
-					
-					if (i == 0)
-						charIndex1 = input.nextInt();
-					if (i == 1)
-						charIndex2 = input.nextInt();
-					
-					if (charIndex1 == charIndex2)
-						System.out.println("Error! Choose another character!");
-				}
+				if (player.characterInventory.get(charIndex1) == player.characterInventory.get(charIndex2))
+					System.out.println("Error! Choose another character!");
 				
 				System.out.println("Choose a map: ");
 				
@@ -86,7 +79,7 @@ public class GachaSimulator {
 					System.out.printf("[%d] %s\n", j, mapList.get(j).getMapName());
 				}
 				
-				int mapChoice = input.nextInt();
+				int mapChoice = Integer.parseInt(input.nextLine());
 				
 				switch(userChoice) {
 				case 0: //underground caverns
@@ -114,6 +107,7 @@ public class GachaSimulator {
 				
 			}
 		}
+		input.close();
 		
 	}
 }
