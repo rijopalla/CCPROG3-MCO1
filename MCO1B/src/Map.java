@@ -324,7 +324,7 @@ public class Map {
 		return sum;
 	}
 	
-	public int adventure(Map map, Character char1, Character char2) {
+	public int adventure(Character char1, Character char2) {
 		
 		float elementComboMultiplier = getElementComboMultiplier(char1, char2);
 		float totalFinalWeaponPower = calculateTotalFinalWeaponPower(char1.getCharacterWeapon(), char2.getCharacterWeapon());
@@ -333,7 +333,7 @@ public class Map {
 		int   enemySuperiority = getEnemySuperiority();
 		int   totalResource = 0;
 		
-		totalResource = (int)(map.baseAmount + (int)(totalFinalWeaponPower/24) * (int)(totalCharacterInfluence/36)  
+		totalResource = (int)(this.baseAmount + (int)(totalFinalWeaponPower/24) * (int)(totalCharacterInfluence/36)  
 						* elementComboMultiplier); //calculate total resources the player would get (based on formula given in the specs)
 		
 		//check if character superiority is greater than enemy superiority
