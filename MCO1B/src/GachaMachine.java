@@ -92,7 +92,7 @@ public class GachaMachine {
 		
 		player.subtractResource(2700);
 		
-		for (int i = 0; i < 9 ; i++) {  //Loops pulling 10 times
+		for (int i = 0; i < 10 ; i++) {  //Loops pulling 10 times
 			pullRarity = 1 + roll.nextInt(10) + roll.nextFloat();
 			if (pullRarity >= 1 && pullRarity <= 5){//1-Rarity = 50% 
 				listIndex = roll.nextInt(5);  //Randomizes from index 0-5		
@@ -130,7 +130,7 @@ public class GachaMachine {
 		
 		player.subtractResource(2700);
 		
-		for (int i = 0; i < 9 ; i++) {  //Loops pulling 10 times
+		for (int i = 0; i < 10 ; i++) {  //Loops pulling 10 times
 			pullRarity = 1 + roll.nextInt(10) +  roll.nextFloat();
 			if (pullRarity >= 1 && pullRarity <= 5){//1-Rarity = 50% 
 				listIndex = roll.nextInt(5);  //Randomizes from index 0-5	
