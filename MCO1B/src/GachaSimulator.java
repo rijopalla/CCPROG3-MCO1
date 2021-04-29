@@ -104,7 +104,41 @@ public class GachaSimulator {
 			else {
 				//TODO: More options for managing characters/weapon
 				System.out.println("---------Management-------------");
+				System.out.println("Enter 1 to manage Characters or Enter 2 to manage Weapons");
+				userChoice = input.nextInt();
 				
+					if (userChoice == 1) {
+						System.out.println("---------Character Management-------------");
+						player.displayCharInventory(); // displays Character Inventory
+						System.out.println("Enter the number of the action you wish to execute");
+						System.out.println("1. Merge characters");
+						System.out.println("2. Level up character");
+						System.out.println("3. Equip a weapon on a character");
+						userChoice = input.nextInt();
+						
+						switch(userChoice) {
+						case 1: //Merge characters
+							System.out.println("Enter the number of the characters you wish to merge");
+							int charChoice1 = input.nextint();
+							int charChoice2 = input.nextint();
+							int charChoice3 = input.nextint();
+						case 2: //Level up characters
+							player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
+							break;
+						case 3: //Equip weapon on a character
+							player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
+							break;
+						}
+						
+					}
+					else {
+						System.out.println("---------Weapon Management-------------");
+						player.displayWeaponInventory(); // displays Weapon Inventory
+						System.out.println("Enter the number of the action you wish to execute");
+						System.out.println("1. Merge weapon");
+						System.out.println("2. Level up weapon");
+						System.out.println("3. Equip weapon to character");
+					}
 			}
 		}
 		input.close();
