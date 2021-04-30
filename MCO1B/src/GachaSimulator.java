@@ -105,7 +105,7 @@ public class GachaSimulator {
 				//TODO: More options for managing characters/weapon
 				System.out.println("---------Management-------------");
 				System.out.println("Enter 1 to manage Characters or Enter 2 to manage Weapons");
-				userChoice = input.nextInt();
+				userChoice = Integer.parseInt();
 				
 					if (userChoice == 1) {
 						System.out.println("---------Character Management-------------");
@@ -114,16 +114,21 @@ public class GachaSimulator {
 						System.out.println("1. Merge characters");
 						System.out.println("2. Level up character");
 						System.out.println("3. Equip a weapon on a character");
-						userChoice = input.nextInt();
+						userChoice = Integer.parseInt();
 						
 						switch(userChoice) {
 						case 1: //Merge characters
-							System.out.println("Enter the number of the characters you wish to merge");
-							int charChoice1 = input.nextint();
-							int charChoice2 = input.nextint();
-							int charChoice3 = input.nextint();
+							System.out.println("Enter the number of the (3) characters you wish to merge");
+							charIndex1 = Integer.parseInt(); //stores index of first character
+							charindex2 = Integer.parseInt(); 
+							int charIndex3 = Integer.parseInt();
+							player.getPlayerCharacter(charIndex1).mergeChar(player.getPlayerCharacter(charindex2),player.getPlayerCharacter(charIndex3));
 						case 2: //Level up characters
-							player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
+							System.out.println("Enter the number of the character you wish to levelup");
+							charIndex1 = Integer.parseInt();
+							System.out.println("Enter the Amount of Resource you wish to spend");
+							userChoice = Integer.parseInt();
+							player.getPlayerCharacter(charIndex1).charLevelUp(userChoice);
 							break;
 						case 3: //Equip weapon on a character
 							player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
