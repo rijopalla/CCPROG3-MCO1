@@ -26,9 +26,11 @@ public class GachaSimulator {
 	static int weapIndex2 = 0; 
 	static int weapIndex3 = 0;
 	
+	static GachaMachine machine = new GachaMachine(); //create new gacha machine object
+	
 	//Interface functions
 	
-	public static void playerAdventure(Player player, ArrayList<Map> mapList) {
+	private static void playerAdventure(Player player, ArrayList<Map> mapList) {
 		System.out.println("-----------Adventure-----------");
 		System.out.println("Select two characters: ");
 		
@@ -39,7 +41,7 @@ public class GachaSimulator {
 		charIndex1 = Integer.parseInt(input.nextLine());
 		charIndex2 = Integer.parseInt(input.nextLine());
 			
-		if (player.characterInventory.get(charIndex1) == player.characterInventory.get(charIndex2))
+		if (player.getCharInventory().get(charIndex1) == player.getCharInventory().get(charIndex2))
 			System.out.println("Error! Choose another character!");
 		
 		System.out.println("Choose a map: ");
@@ -70,7 +72,7 @@ public class GachaSimulator {
 		}
 	}
 	
-	public static void manageInventory(Player player) {
+	private static void manageInventory(Player player) {
 		System.out.println("---------Management-------------");
 		System.out.println("Enter 1 to manage Characters or Enter 2 to manage Weapons");
 		userChoice = Integer.parseInt(input.nextLine());
@@ -158,7 +160,66 @@ public class GachaSimulator {
 				}
 	}
 	
-	public static void actionMenu(Player player, ArrayList<Map> mapList) {
+	private static void gacha(Player player) {
+		System.out.println("-------------Gacha------------");
+		System.out.println("What do you want to pull for? (Enter 1 or 2");
+		System.out.println("1. Character");
+		System.out.println("2. Weapon");
+		userChoice = Integer.parseInt(input.nextLine());
+		
+		if (userChoice == 1) {
+			System.out.println("Do you want to do a:");
+			System.out.println("1. Single pull (Costs 300 resources)");
+			System.out.println("2. Multi pull (Costs 2700 resources)");
+			userChoice = Integer.parseInt(input.nextLine());
+			
+			switch(userChoice) {
+			case 1: //Single Pull (Char)
+				if (player.getResourceAmount() >= 300) { //if player has enough resources to pull (300)
+					player.addCharacter(machine.charSinglePull()); //pull for one character and add it to the player's inventory
+				    player.subtractResource(300); //subtract 300 resources from player
+				}
+				else
+					System.out.println("You don't have enough resources!");
+				break;
+			case 2: //Multi Pull (Char)
+				if (player.getResourceAmount() >= 2700) {  //if player has enough resources to pull (2700)
+					player.getCharInventory().addAll(machine.charMultiPull()); //pull for ten characters and add it to the player's inventory
+					player.subtractResource(2700); //subtract 2700 resources from player
+				}
+				else
+					System.out.println("You don't have enough resources!");
+				break;
+			}
+		}
+		else {
+			System.out.println("Do you want to do a:");
+			System.out.println("1. Single pull (Costs 300 resources)");
+			System.out.println("2. Multi pull (Costs 2700 resources)");
+			userChoice = Integer.parseInt(input.nextLine());
+			
+			switch(userChoice) {
+			case 1: //Single Pull (Weapon)
+				if (player.getResourceAmount() >= 300) { //if player has enough resources to pull (300)
+					player.addWeapon(machine.weapSinglePull());
+				    player.subtractResource(300); //subtract 300 resources from player
+				}
+				else
+					System.out.println("You don't have enough resources!");
+				break;
+			case 2: //Multi Pull (Weapon)
+				if (player.getResourceAmount() >= 2700) {  //if player has enough resources to pull (2700)
+					player.getWepInventory().addAll(machine.weapMultiPull()); //pull for ten characters and add it to the player's inventory
+					player.subtractResource(2700); //subtract 2700 resources from player
+				}
+				else
+					System.out.println("You don't have enough resources!");
+				break;
+			}
+		}	
+	}
+	
+	private static void actionMenu(Player player, ArrayList<Map> mapList) {
 		
 		System.out.println("-------------------------------------------------");
 		System.out.println("Current Resources: " + player.getResourceAmount());
@@ -168,7 +229,8 @@ public class GachaSimulator {
 		System.out.println("What action do you want do to next?(Enter 1, 2, or 3)");
 		System.out.println("1. Go on an adventure");
 		System.out.println("2. Manage Characters/Weapons");
-		System.out.println("3. Quit");
+		System.out.println("3. Gacha");
+		System.out.println("4. Quit");
 		System.out.println("-------------------------------------------------");
 		userChoice = Integer.parseInt(input.nextLine());
 		
@@ -177,8 +239,10 @@ public class GachaSimulator {
 		else if (userChoice == 2)
 			manageInventory(player);
 		else if (userChoice == 3)
+			gacha(player);
+		else if (userChoice == 4)
 			isActive = false;
-		else if (userChoice >= 3 || userChoice <= 1)
+		else if (userChoice >= 4 || userChoice <= 1)
 			System.out.println("Invalid input!");
 	}
 
@@ -199,14 +263,13 @@ public class GachaSimulator {
 		String playerName = input.nextLine(); //take user input as player name
 		
 		Player player = new Player(playerName); //create a new player
-		GachaMachine machine = new GachaMachine(); //create new gacha machine object
 		
 		//Perform 1 multiroll for characters, store it to player inventory
-		player.characterInventory.addAll(machine.charMultiPull());
+		player.getCharInventory().addAll(machine.charMultiPull());
 		player.subtractResource(2700); //subtract 2700 resources from player
 		
 		//Perform 1 multiroll for weapons, store it to player inventory
-		player.weaponInventory.addAll(machine.weapMultiPull());
+		player.getWepInventory().addAll(machine.weapMultiPull());
 		player.subtractResource(2700); //subtract 2700 resources from player
 		
 		System.out.printf("\n");
