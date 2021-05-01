@@ -106,13 +106,16 @@ public class GachaSimulator {
 					//calls the merge method 
 					player.getPlayerCharacter(charIndex1).mergeChar(player.getPlayerCharacter(charIndex2),player.getPlayerCharacter(charIndex3));
 				case 2: //Level up characters
-					System.out.println("Enter the number of the character you wish to levelup");
+					System.out.println("Enter the number of the character you wish to level up");
 					charIndex1 = Integer.parseInt(input.nextLine());
 					System.out.println("Enter the Amount of Resource you wish to spend");
 					userChoice = Integer.parseInt(input.nextLine());
-					player.subtractResource(userChoice); //player's amount of resources will be subtracted by the amount they input
-					//Levels up the character based on amount of resource
-					player.getPlayerCharacter(charIndex1).charLevelUp(userChoice);
+					if (player.getResourceAmount() > 0) { //if player has any resources (>0)
+						player.getPlayerCharacter(charIndex1).charLevelUp(userChoice); //Levels up the character based on amount of resource
+						player.subtractResource(userChoice); //player's amount of resources will be subtracted by the amount they input
+					}
+					else
+						System.out.println("Insufficient resources!");
 					break;
 				case 3: //Equip weapon on a character
 					player.displayWeaponInventory();
@@ -152,9 +155,12 @@ public class GachaSimulator {
 					System.out.println("Enter the Amount of Resource you wish to spend");
 					userChoice = Integer.parseInt(input.nextLine());
 					player.subtractResource(userChoice); //player's amount of resources will be reduced
-					
-					//Calls levelup method and Levels up the character based on amount of resource
-					player.getPlayerWeapon(weapIndex1).weapLevelUp(userChoice);
+					if (player.getResourceAmount() > 0) { //if player has any resources (>0)
+						player.getPlayerWeapon(weapIndex1).weapLevelUp(userChoice); //Levels up the weapon based on amount of resource
+						player.subtractResource(userChoice); //player's amount of resources will be subtracted by the amount they input
+					}
+					else
+						System.out.println("Insufficient resources!");
 					break;
 				case 3: //Equip weapon on a character
 					System.out.println("Enter the number of the weapon you wish to equip ");
@@ -167,7 +173,7 @@ public class GachaSimulator {
 					player.getPlayerCharacter(charIndex1).weaponEquip(player.getPlayerWeapon(userChoice));
 					break;
 					}
-				}
+				}			
 	}
 	
 	private static void gacha(Player player) {
