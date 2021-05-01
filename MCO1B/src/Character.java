@@ -18,7 +18,6 @@ public class Character {
 	//Methods
 	public void charLevelUp(int resourceNum) {
 		//takes the allotted resources as an input
-		//TODO: make sure that resourceNum is subtracted to the player's no. of resources in driver class
 		
 		//character only levels up if resource amount > 0 and character level < max level (100)
 		if (resourceNum > 0 && this.characterLevel < 100) {

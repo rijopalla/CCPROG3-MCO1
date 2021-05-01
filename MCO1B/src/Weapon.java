@@ -43,7 +43,6 @@ public class Weapon {
 	//Methods
 	public void weapLevelUp(int resourceNum) {
 		//takes the allotted resources as an input
-		//TODO: make sure that resourceNum is subtracted to the player's no. of resources in driver class
 		
 		//weapon only levels up if resource amount > 0 and weapon's level < max level (50)
 		if (resourceNum > 0 && this.weaponLevel < 50) {
