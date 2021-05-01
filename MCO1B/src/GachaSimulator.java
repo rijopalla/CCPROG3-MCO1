@@ -168,12 +168,12 @@ public class GachaSimulator {
 						switch(userChoice) {
 						case 1: //Merge weapons
 							System.out.println("Enter the number of the (3) weapons you wish to merge");
-							int weapIndex1 = Integer.parseInt(); //stores index of first character
+							int weapIndex1 = Integer.parseInt(); //stores index of first weap
 							int weapindex2 = Integer.parseInt(); 
 							int weapIndex3 = Integer.parseInt();
 							
 							//calls the merge method 
-							player.getPlayerCharacter(charIndex1).mergeChar(player.getPlayerCharacter(charindex2),player.getPlayerCharacter(charIndex3));
+							player.getPlayerWeapon(weapIndex1).mergeWeap(player.getPlayerWeapon(weapIndex2),player.getPlayerWeapon(weapIndex3));
 						case 2: //Level up weapon
 							System.out.println("Enter the number of the character you wish to levelup");
 							weapIndex1 = Integer.parseInt();
@@ -184,9 +184,9 @@ public class GachaSimulator {
 							player.getPlayerWeapon(weapIndex1).weapLevelUp(userChoice);
 							break;
 						case 3: //Equip weapon on a character
-							player.displayCharacterInventory();
 							System.out.println("Enter the number of the weapon you wish to equip ");
 							weapIndex1 = Integer.parseInt(); //stores the weapon's index
+							player.displayCharacterInventory();
 							System.out.println("Enter the number of the character you wish to equip the weapon on");
 							charIndex1 = Integer.parseInt();
 							
