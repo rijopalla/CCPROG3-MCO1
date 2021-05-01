@@ -29,7 +29,6 @@ public class GachaSimulator {
 	static GachaMachine machine = new GachaMachine(); //create new gacha machine object
 	
 	//Interface functions
-	
 	private static void playerAdventure(Player player, ArrayList<Map> mapList) {
 		System.out.println("-----------Adventure-----------");
 		System.out.println("Select two characters: ");
@@ -37,7 +36,7 @@ public class GachaSimulator {
 		//Show player's character inventory
 		player.displayCharInventory();
 		
-		//int variables that store the index of chosen character (based on user input):
+		//store following input to charIndex variables
 		charIndex1 = Integer.parseInt(input.nextLine());
 		charIndex2 = Integer.parseInt(input.nextLine());
 			
@@ -73,25 +72,26 @@ public class GachaSimulator {
 	}
 	
 	private static void manageInventory(Player player) {
+		//lets player manage (merge, equip/unequip, level up) their characters and weapons
 		System.out.println("---------Management-------------");
 		System.out.println("Enter 1 to manage Characters or Enter 2 to manage Weapons");
 		userChoice = Integer.parseInt(input.nextLine());
 		
-			if (userChoice == 1) {
+			if (userChoice == 1) { //Character
 				System.out.println("---------Character Management-------------");
-				player.displayCharInventory(); // displays Character Inventory
+				player.displayCharInventory(); // display Character Inventory
 				System.out.println("Enter the number of the action you wish to execute");
 				System.out.println("1. Merge characters");
 				System.out.println("2. Level up character");
 				System.out.println("3. Equip a weapon on a character");
-				userChoice = Integer.parseInt(input.nextLine());
+				userChoice = Integer.parseInt(input.nextLine()); //take user input
 				
 				switch(userChoice) {
 				case 1: //Merge characters
 					System.out.println("Enter the number of the (3) characters you wish to merge");
-					charIndex1 = Integer.parseInt(input.nextLine()); //stores index of first character
-					charIndex2 = Integer.parseInt(input.nextLine()); 
-					charIndex3 = Integer.parseInt(input.nextLine());
+					charIndex1 = Integer.parseInt(input.nextLine()); //store index of first character
+					charIndex2 = Integer.parseInt(input.nextLine()); //store index of second character
+					charIndex3 = Integer.parseInt(input.nextLine()); //store index of third character
 					
 					//calls the merge method 
 					player.getPlayerCharacter(charIndex1).mergeChar(player.getPlayerCharacter(charIndex2),player.getPlayerCharacter(charIndex3));
@@ -117,7 +117,7 @@ public class GachaSimulator {
 				}
 				
 			}
-			else {
+			else { //Weapon
 				System.out.println("---------Weapon Management-------------");
 				player.displayWeaponInventory(); // displays Weapon Inventory
 				System.out.println("Enter the number of the action you wish to execute");
@@ -125,14 +125,14 @@ public class GachaSimulator {
 				System.out.println("2. Level up weapon");
 				System.out.println("3. Equip weapon to character");
 				
-				userChoice = Integer.parseInt(input.nextLine());
+				userChoice = Integer.parseInt(input.nextLine()); //take the next integer input from user
 				
 				switch(userChoice) {
 				case 1: //Merge weapons
 					System.out.println("Enter the number of the (3) weapons you wish to merge");
-					weapIndex1 = Integer.parseInt(input.nextLine()); //stores index of first weap
-					weapIndex2 = Integer.parseInt(input.nextLine()); 
-					weapIndex3 = Integer.parseInt(input.nextLine());
+					weapIndex1 = Integer.parseInt(input.nextLine()); //store index of first wep
+					weapIndex2 = Integer.parseInt(input.nextLine()); //store index of second wep
+					weapIndex3 = Integer.parseInt(input.nextLine()); //store index of third wep
 					
 					//calls the merge method 
 					player.getPlayerWeapon(weapIndex1).mergeWeap(player.getPlayerWeapon(weapIndex2),player.getPlayerWeapon(weapIndex3));
@@ -161,6 +161,7 @@ public class GachaSimulator {
 	}
 	
 	private static void gacha(Player player) {
+		//lets player pull for a character or a weapon, provided they have the necessary resources
 		System.out.println("-------------Gacha------------");
 		System.out.println("What do you want to pull for? (Enter 1 or 2");
 		System.out.println("1. Character");
