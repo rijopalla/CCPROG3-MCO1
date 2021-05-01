@@ -1,11 +1,12 @@
+package Classes;
 
 import java.util.ArrayList;
 public class Player {
 
 	//Properties
 	private String playerName; //user defined name
-	ArrayList<Character> characterInventory = new ArrayList<Character>(); //array list of characters
-	ArrayList<Weapon>    weaponInventory = new ArrayList<Weapon>();   //array list of weapons
+	public  ArrayList<Character> characterInventory = new ArrayList<Character>(); //array list of characters
+	public  ArrayList<Weapon>    weaponInventory = new ArrayList<Weapon>();   //array list of weapons
 	private int resourceAmount; //stores player's resources
 	
 	//Constructor

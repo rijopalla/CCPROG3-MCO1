@@ -8,6 +8,11 @@
  */ 
 
 import java.util.Scanner;
+
+import Classes.GachaMachine;
+import Classes.Map;
+import Classes.Player;
+
 import java.util.ArrayList;
 
 public class GachaSimulator {
