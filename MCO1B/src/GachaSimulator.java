@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class GachaSimulator {
 	
 	static Scanner input = new Scanner(System.in); //scanner variable that takes string inputs
-	static int userChoice; // int variable for user actions 
+	static int userChoice; //int variable for user actions 
 	static boolean isActive = true; //used in main loop
 	
 	//int variables that store the index of chosen character (based on user input):
@@ -27,7 +27,7 @@ public class GachaSimulator {
 	static int charIndex3 = 0;
 	
 	//int variables that store the index of chosen weapon (based on user input):
-	static int weapIndex1 = 0; //stores index of first weap
+	static int weapIndex1 = 0; 
 	static int weapIndex2 = 0; 
 	static int weapIndex3 = 0;
 	
@@ -44,35 +44,40 @@ public class GachaSimulator {
 		//store following input to charIndex variables
 		charIndex1 = Integer.parseInt(input.nextLine());
 		charIndex2 = Integer.parseInt(input.nextLine());
-			
-		if (player.getCharInventory().get(charIndex1) == player.getCharInventory().get(charIndex2))
-			System.out.println("Error! Choose another character!");
 		
-		System.out.println("Choose a map: ");
+		if (player.getCharInventory().get(charIndex1).getCharacterWeapon() == null && player.getCharInventory().get(charIndex2).getCharacterWeapon() == null)
+			System.out.println("Your characters must have a weapon equipped before going on an adventure!");
 		
-		for (int j = 0; j < mapList.size(); j++) { //displays map names
-			System.out.printf("[%d] %s\n", j, mapList.get(j).getMapName());
-		}
+		else {
+			if (player.getCharInventory().get(charIndex1) == player.getCharInventory().get(charIndex2))
+				System.out.println("Error! Choose another character!");
 		
-		int mapChoice = Integer.parseInt(input.nextLine());
+			System.out.println("Choose a map: ");
 		
-		switch(mapChoice) {
-		case 0: //underground caverns
-			//player gets resources from the map and the total no. of resources is increased
-			player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
-			break;
-		case 1: //forest of enchantments
-			player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
-			break;
-		case 2: //sea of hope
-			player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
-			break;
-		case 3: //tower of ether
-			player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
-			break;
-		case 4: //celestial plane
-			player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
-			break;
+			for (int j = 0; j < mapList.size(); j++) { //displays map names
+				System.out.printf("[%d] %s\n", j, mapList.get(j).getMapName());
+			}
+		
+			int mapChoice = Integer.parseInt(input.nextLine());
+		
+			switch(mapChoice) {
+			case 0: //underground caverns
+				//player gets resources from the map and the total no. of resources is increased
+				player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
+				break;
+			case 1: //forest of enchantments
+				player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
+				break;
+			case 2: //sea of hope
+				player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
+				break;
+			case 3: //tower of ether
+				player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
+				break;
+			case 4: //celestial plane
+				player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
+				break;
+			}
 		}
 	}
 	
