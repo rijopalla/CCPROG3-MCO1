@@ -45,9 +45,9 @@ public class GachaSimulator {
 		charIndex1 = Integer.parseInt(input.nextLine());
 		charIndex2 = Integer.parseInt(input.nextLine());
 		
+		//Check if both characters have weapons equipped
 		if (player.getCharInventory().get(charIndex1).getCharacterWeapon() == null && player.getCharInventory().get(charIndex2).getCharacterWeapon() == null)
 			System.out.println("Your characters must have a weapon equipped before going on an adventure!");
-		
 		else {
 			if (player.getCharInventory().get(charIndex1) == player.getCharInventory().get(charIndex2))
 				System.out.println("Error! Choose another character!");
