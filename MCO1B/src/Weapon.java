@@ -123,5 +123,4 @@ public class Weapon {
 	public void setIsEquipped(boolean equipCheck) {
 		this.isEquipped = equipCheck;
 	}
-
 }

@@ -101,5 +101,4 @@ public class Character {
 	public Weapon getCharacterWeapon() {
 		return this.characterWeapon;
 	}
-	
 }
