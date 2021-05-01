@@ -48,11 +48,11 @@ public class GachaSimulator {
 		
 		//Perform 1 multiroll for characters, store it to player inventory
 		player.characterInventory.addAll(machine.charMultiPull());
-		player.subtractResource(2700);
+		player.subtractResource(2700); //subtract 2700 resources from player
 		
 		//Perform 1 multiroll for weapons, store it to player inventory
 		player.weaponInventory.addAll(machine.weapMultiPull());
-		player.subtractResource(2700);
+		player.subtractResource(2700); //subtract 2700 resources from player
 		
 		System.out.printf("\n");
 		
@@ -154,7 +154,7 @@ public class GachaSimulator {
 							charIndex1 = Integer.parseInt(input.nextLine());
 							System.out.println("Enter the Amount of Resource you wish to spend");
 							userChoice = Integer.parseInt(input.nextLine());
-							
+							player.subtractResource(userChoice); //player's amount of resources will be subtracted by the amount they input
 							//Levels up the character based on amount of resource
 							player.getPlayerCharacter(charIndex1).charLevelUp(userChoice);
 							break;
@@ -191,10 +191,11 @@ public class GachaSimulator {
 							//calls the merge method 
 							player.getPlayerWeapon(weapIndex1).mergeWeap(player.getPlayerWeapon(weapIndex2),player.getPlayerWeapon(weapIndex3));
 						case 2: //Level up weapon
-							System.out.println("Enter the number of the character you wish to levelup");
+							System.out.println("Enter the number of the weapon you wish to levelup");
 							weapIndex1 = Integer.parseInt(input.nextLine());
 							System.out.println("Enter the Amount of Resource you wish to spend");
 							userChoice = Integer.parseInt(input.nextLine());
+							player.subtractResource(userChoice); //player's amount of resources will be reduced
 							
 							//Calls levelup method and Levels up the character based on amount of resource
 							player.getPlayerWeapon(weapIndex1).weapLevelUp(userChoice);
