@@ -22,10 +22,12 @@ public class Character {
 		
 		//character only levels up if resource amount > 0 and character level < max level (100)
 		if (resourceNum > 0 && this.characterLevel < 100) {
-			
 			//character levels up until loop reaches input
 			for (int i = 0; i < resourceNum; i++) 
 				this.characterLevel++;
+		}
+		else if (this.characterLevel >= 100) {
+			System.out.print("You have reached the maximum level");
 		}
 		
 	}
