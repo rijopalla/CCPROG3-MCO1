@@ -3,6 +3,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class GachaSimulator {
+	
 
 	public static void main(String[] args) {
 		
