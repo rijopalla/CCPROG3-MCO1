@@ -3,8 +3,8 @@ public class Player {
 
 	//Properties
 	private String playerName; //user defined name
-	ArrayList<Character> characterInventory = new ArrayList<Character>(); //array list of characters
-	ArrayList<Weapon>    weaponInventory = new ArrayList<Weapon>();   //array list of weapons
+	private ArrayList<Character> characterInventory = new ArrayList<Character>(); //array list of characters
+	private ArrayList<Weapon>    weaponInventory = new ArrayList<Weapon>();   //array list of weapons
 	private int resourceAmount; //stores player's resources
 	
 	//Constructor
@@ -14,12 +14,22 @@ public class Player {
 	}
 	
 	//Methods
+	
+	//Getters
 	public Character getPlayerCharacter(int index) {
 		return this.characterInventory.get(index);
 	}
 	
 	public Weapon getPlayerWeapon(int index) {
 		return this.weaponInventory.get(index);
+	}
+	
+	public ArrayList<Character> getCharInventory(){
+		return this.characterInventory;
+	}
+	
+	public ArrayList<Weapon> getWepInventory() {
+		return this.weaponInventory;
 	}
 	
 	public void addCharacter(Character chara) {
