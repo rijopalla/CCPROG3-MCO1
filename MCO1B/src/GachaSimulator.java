@@ -1,4 +1,12 @@
-// main/driver class
+/*
+ * main/driver class
+ * 
+ * Group 10: Opalla, Rijan & Tipan, Loben Klien
+ *
+ * Latest edit: 5/1/2021
+ * 
+ */ 
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -122,16 +130,27 @@ public class GachaSimulator {
 							charIndex1 = Integer.parseInt(); //stores index of first character
 							charindex2 = Integer.parseInt(); 
 							int charIndex3 = Integer.parseInt();
+							
+							//calls the merge method 
 							player.getPlayerCharacter(charIndex1).mergeChar(player.getPlayerCharacter(charindex2),player.getPlayerCharacter(charIndex3));
 						case 2: //Level up characters
 							System.out.println("Enter the number of the character you wish to levelup");
 							charIndex1 = Integer.parseInt();
 							System.out.println("Enter the Amount of Resource you wish to spend");
 							userChoice = Integer.parseInt();
+							
+							//Levels up the character based on amount of resource
 							player.getPlayerCharacter(charIndex1).charLevelUp(userChoice);
 							break;
 						case 3: //Equip weapon on a character
-							player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
+							player.displayWeaponInventory();
+							System.out.println("Enter the number of the weapon you wish to equip ");
+							userChoice = Integer.parseInt(); //stores the weapon's index
+							System.out.println("Enter the number of the character you wish to equip the weapon on");
+							charIndex1 = Integer.parseInt();
+							
+							//Equips the weapon to the corresponding character
+							player.getPlayerCharacter(charIndex1).weaponEquip(player.getPlayerWeapon(userChoice));
 							break;
 						}
 						
@@ -143,6 +162,37 @@ public class GachaSimulator {
 						System.out.println("1. Merge weapon");
 						System.out.println("2. Level up weapon");
 						System.out.println("3. Equip weapon to character");
+						
+						userChoice = Integer.parseInt();
+						
+						switch(userChoice) {
+						case 1: //Merge weapons
+							System.out.println("Enter the number of the (3) weapons you wish to merge");
+							int weapIndex1 = Integer.parseInt(); //stores index of first character
+							int weapindex2 = Integer.parseInt(); 
+							int weapIndex3 = Integer.parseInt();
+							
+							//calls the merge method 
+							player.getPlayerCharacter(charIndex1).mergeChar(player.getPlayerCharacter(charindex2),player.getPlayerCharacter(charIndex3));
+						case 2: //Level up weapon
+							System.out.println("Enter the number of the character you wish to levelup");
+							weapIndex1 = Integer.parseInt();
+							System.out.println("Enter the Amount of Resource you wish to spend");
+							userChoice = Integer.parseInt();
+							
+							//Calls levelup method and Levels up the character based on amount of resource
+							player.getPlayerWeapon(weapIndex1).weapLevelUp(userChoice);
+							break;
+						case 3: //Equip weapon on a character
+							player.displayCharacterInventory();
+							System.out.println("Enter the number of the weapon you wish to equip ");
+							weapIndex1 = Integer.parseInt(); //stores the weapon's index
+							System.out.println("Enter the number of the character you wish to equip the weapon on");
+							charIndex1 = Integer.parseInt();
+							
+							//Equips the weapon to the corresponding character
+							player.getPlayerCharacter(charIndex1).weaponEquip(player.getPlayerWeapon(userChoice));
+							break;
 					}
 			}
 		}
