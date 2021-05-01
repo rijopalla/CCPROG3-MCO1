@@ -73,7 +73,7 @@ public class Player {
 		for (int i = 0; i < this.weaponInventory.size(); i++) {
 			if (this.weaponInventory.get(i).isEquipped()) { //if the weapon is currently equipped on a character:
 				//print the weapon's index, name, power, rarity, level, and the name of the character it is currently equipped to
-				System.out.printf("[%d] Name: %s Power: %d Rarity: %d Level %d Equipped on: %s", i, this.weaponInventory.get(i).getWeaponName(),
+				System.out.printf("[%d] Name: %s Power: %d Rarity: %d Level %d Equipped on: %s\n", i, this.weaponInventory.get(i).getWeaponName(),
 						this.weaponInventory.get(i).getWeaponPower(), this.weaponInventory.get(i).getWeaponRarity(), this.weaponInventory.get(i).getWeaponLevel(),
 						this.weaponInventory.get(i).getWeaponOwner().getCharacterName());
 			}
