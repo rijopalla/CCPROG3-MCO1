@@ -69,9 +69,7 @@ public class GachaMachine {
 	}	
 	
 	//Methods
-	public void charSinglePull(Player player) {
-
-		player.subtractResource(300);
+	public Character charSinglePull() {
 		
 		pullRarity = 1 + roll.nextInt(10) + roll.nextFloat(); // chooses a random number from 1-10
 															//in order to get rarity (including decimal)
@@ -85,31 +83,21 @@ public class GachaMachine {
 				listIndex = 12 + roll.nextInt(5);  //Randomizes from index 12-17	
 			}
 		
-		player.addCharacter(characterList.get(listIndex)); //Passes arrayList object to player method
+		return characterList.get(listIndex); //return arrayList object (new character) 
 	}
 	
-	public void charMultiPull(Player player) {
+	public ArrayList<Character> charMultiPull() {
 		
-		player.subtractResource(2700);
+		ArrayList<Character> outputList = new ArrayList<Character>();
 		
-		for (int i = 0; i < 10 ; i++) {  //Loops pulling 10 times
-			pullRarity = 1 + roll.nextInt(10) + roll.nextFloat();
-			if (pullRarity >= 1 && pullRarity <= 5){//1-Rarity = 50% 
-				listIndex = roll.nextInt(5);  //Randomizes from index 0-5		
-			}
-			else if (pullRarity > 5 && pullRarity <= 8.5){//2-Rarity = 35% 
-				listIndex = 6 + roll.nextInt(5);  //Randomizes from index 6-11	
-			}
-			else {//3-Rarity = 15% 
-				listIndex = 12 + roll.nextInt(5);  //Randomizes from index 12-17	
-			}
-			player.addCharacter(characterList.get(listIndex)); //Passes arrayList object to player method
+		for (int i = 0; i < 10; i++) {
+			outputList.add(this.charSinglePull());
 		}
+		
+		return outputList;
 	}
 	
-	public void weapSinglePull(Player player) {
-		
-		player.subtractResource(300);
+	public Weapon weapSinglePull() {
 		
 		pullRarity = 1 + roll.nextInt(10) + roll.nextFloat(); // chooses a random number from 1-10 
 															//in order to get rarity (including decimal)
@@ -123,25 +111,17 @@ public class GachaMachine {
 			listIndex = 12 + roll.nextInt(5);  //Randomizes from index 12-17	
 		}	
 		
-		player.addWeapon(weaponList.get(listIndex));//Passes arrayList object to player method	
+		return weaponList.get(listIndex);//Passes arrayList object to player method	
 	}
 	
-	public void weapMultiPull(Player player) {
+	public ArrayList<Weapon> weapMultiPull() {
 		
-		player.subtractResource(2700);
+		ArrayList<Weapon> outputList = new ArrayList<Weapon>();
 		
 		for (int i = 0; i < 10 ; i++) {  //Loops pulling 10 times
-			pullRarity = 1 + roll.nextInt(10) +  roll.nextFloat();
-			if (pullRarity >= 1 && pullRarity <= 5){//1-Rarity = 50% 
-				listIndex = roll.nextInt(5);  //Randomizes from index 0-5	
-			}
-			else if (pullRarity > 5 && pullRarity <= 8.5){//2-Rarity = 35% 
-				listIndex = 6 + roll.nextInt(5);  //Randomizes from index 6-11	
-			}
-			else {//3-Rarity = 15% 
-				listIndex = 12 + roll.nextInt(5);  //Randomizes from index 12-17	
-			}
-			player.addWeapon(weaponList.get(listIndex));//Passes arrayList object to player method
+			outputList.add(this.weapSinglePull());
 		}
+		
+		return outputList;
 	}
 }
