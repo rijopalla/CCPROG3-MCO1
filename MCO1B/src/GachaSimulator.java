@@ -104,10 +104,12 @@ public class GachaSimulator {
 					charIndex3 = Integer.parseInt(input.nextLine()); //store index of third character
 					
 					//calls the merge method 
-					player.getPlayerCharacter(charIndex1).mergeChar(player.getPlayerCharacter(charIndex2),player.getPlayerCharacter(charIndex3));
-					//remove characters from player inventory
-					player.getCharInventory().remove(charIndex2); 
-					player.getCharInventory().remove(charIndex3);
+					if (player.getPlayerCharacter(charIndex1).mergeChar(player.getPlayerCharacter(charIndex2),player.getPlayerCharacter(charIndex3))) {
+						//if merging is successful, remove characters from player's inventory
+						System.out.println("Merging successful");
+						player.getCharInventory().remove(charIndex2); 
+						player.getCharInventory().remove(charIndex3);
+					}
 					break;
 				case 2: //Level up characters
 					System.out.println("Enter the number of the character you wish to level up");
@@ -152,10 +154,12 @@ public class GachaSimulator {
 					weapIndex3 = Integer.parseInt(input.nextLine()); //store index of third wep
 					
 					//calls the merge method 
-					player.getPlayerWeapon(weapIndex1).mergeWeap(player.getPlayerWeapon(weapIndex2),player.getPlayerWeapon(weapIndex3));
-					//remove weapons from player inventory
-					player.getWepInventory().remove(weapIndex2);
-					player.getWepInventory().remove(weapIndex3);
+					if (player.getPlayerWeapon(weapIndex1).mergeWeap(player.getPlayerWeapon(weapIndex2),player.getPlayerWeapon(weapIndex3))) {
+						//if merging is successful, remove weapons from player's inventory
+						System.out.println("Merging successful");
+						player.getWepInventory().remove(weapIndex2); 
+						player.getWepInventory().remove(weapIndex3);
+					}
 					break;
 				case 2: //Level up weapon
 					System.out.println("Enter the number of the weapon you wish to levelup");
