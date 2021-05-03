@@ -1,4 +1,4 @@
-package classes;
+package com.mco1.classes;
 import java.util.ArrayList;
 public class Player {
 

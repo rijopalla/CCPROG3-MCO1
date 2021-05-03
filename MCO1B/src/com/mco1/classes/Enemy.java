@@ -1,4 +1,4 @@
-package classes;
+package com.mco1.classes;
 public class Enemy {
 	
 	//Properties

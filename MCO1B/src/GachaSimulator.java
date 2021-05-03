@@ -9,9 +9,9 @@
 
 import java.util.Scanner;
 
-import classes.GachaMachine;
-import classes.Map;
-import classes.Player;
+import com.mco1.classes.GachaMachine;
+import com.mco1.classes.Map;
+import com.mco1.classes.Player;
 
 import java.util.ArrayList;
 
