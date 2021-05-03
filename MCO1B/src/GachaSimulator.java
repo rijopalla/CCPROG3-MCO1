@@ -179,15 +179,16 @@ public class GachaSimulator {
 	private static void gacha(Player player) {
 		//lets player pull for a character or a weapon, provided they have the necessary resources
 		System.out.println("-------------Gacha------------");
-		System.out.println("What do you want to pull for? (Enter 1 or 2");
+		System.out.println("What do you want to pull for? (Enter 1 or 2)");
 		System.out.println("1. Character");
 		System.out.println("2. Weapon");
 		userChoice = Integer.parseInt(input.nextLine());
 		
 		if (userChoice == 1) {
-			System.out.println("Do you want to do a:");
+			System.out.println("What do you want to do next?");
 			System.out.println("1. Single pull (Costs 300 resources)");
 			System.out.println("2. Multi pull (Costs 2700 resources)");
+			System.out.println("3. Go back");
 			userChoice = Integer.parseInt(input.nextLine());
 			
 			switch(userChoice) {
@@ -195,6 +196,7 @@ public class GachaSimulator {
 				if (player.getResourceAmount() >= 300) { //if player has enough resources to pull (300)
 					player.addCharacter(machine.charSinglePull()); //pull for one character and add it to the player's inventory
 				    player.subtractResource(300); //subtract 300 resources from player
+				    player.displayCharInventory(); //show player's character inventory
 				}
 				else
 					System.out.println("You don't have enough resources!");
@@ -203,16 +205,20 @@ public class GachaSimulator {
 				if (player.getResourceAmount() >= 2700) {  //if player has enough resources to pull (2700)
 					player.getCharInventory().addAll(machine.charMultiPull()); //pull for ten characters and add it to the player's inventory
 					player.subtractResource(2700); //subtract 2700 resources from player
+					player.displayCharInventory(); //show player's character inventory
 				}
 				else
 					System.out.println("You don't have enough resources!");
 				break;
+			case 3: //Go back
+				break;
 			}
 		}
 		else {
-			System.out.println("Do you want to do a:");
+			System.out.println("What do you want to do next?");
 			System.out.println("1. Single pull (Costs 300 resources)");
 			System.out.println("2. Multi pull (Costs 2700 resources)");
+			System.out.println("3. Go back");
 			userChoice = Integer.parseInt(input.nextLine());
 			
 			switch(userChoice) {
@@ -220,6 +226,7 @@ public class GachaSimulator {
 				if (player.getResourceAmount() >= 300) { //if player has enough resources to pull (300)
 					player.addWeapon(machine.weapSinglePull());
 				    player.subtractResource(300); //subtract 300 resources from player
+				    player.displayWeaponInventory(); //show player's weapon inventory
 				}
 				else
 					System.out.println("You don't have enough resources!");
@@ -228,6 +235,7 @@ public class GachaSimulator {
 				if (player.getResourceAmount() >= 2700) {  //if player has enough resources to pull (2700)
 					player.getWepInventory().addAll(machine.weapMultiPull()); //pull for ten characters and add it to the player's inventory
 					player.subtractResource(2700); //subtract 2700 resources from player
+					player.displayWeaponInventory(); //show player's weapon inventory
 				}
 				else
 					System.out.println("You don't have enough resources!");
@@ -281,32 +289,18 @@ public class GachaSimulator {
 		
 		Player player = new Player(playerName); //create a new player
 		
-		//Perform 1 multiroll for characters, store it to player inventory
-		player.getCharInventory().addAll(machine.charMultiPull());
-		player.subtractResource(2700); //subtract 2700 resources from player
-		
-		//Perform 1 multiroll for weapons, store it to player inventory
-		player.getWepInventory().addAll(machine.weapMultiPull());
-		player.subtractResource(2700); //subtract 2700 resources from player
-		
 		System.out.printf("\n");
 		
+		//Tutorial message
 		System.out.println("------------------------------------");
 		System.out.printf("Hello %s!\n", player.getPlayerName());
 		System.out.println("Before you start adventuring, you'll need characters and weapons!");
-		System.out.println("Fortunately for you, you already start with 10 of each!");
-		System.out.println("Here are the characters and weapons you currently have: ");
+		System.out.println("You can get characters and weapons when you pull for them in the gacha! (Option 3)");
+		System.out.println("When you're done, don't forget to equip your new weapons to your characters!");
+		System.out.println("You can equip weapons to your characters in the Manage characters/weapons option! (Option 2)");
 		System.out.println("------------------------------------");
 		
-		System.out.printf("\n");
-		
-		//Display player inventory (both character & weapons)
-		player.displayCharInventory();
-		player.displayWeaponInventory();
-		
-		System.out.printf("\n");
-		
-		//TODO: ask player what they want to do next (Manage characters/weapons [this includes merging characters/weap, level up, equip/unequip], or go on an adventure)
+		//ask player what they want to do next (Manage characters/weapons [this includes merging characters/weap, level up, equip/unequip], or go on an adventure)
 		while (isActive) { //main loop	
 			actionMenu(player, mapList); //brings up Menu for next action
 		 }
