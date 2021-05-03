@@ -105,6 +105,7 @@ public class GachaSimulator {
 					
 					//calls the merge method 
 					player.getPlayerCharacter(charIndex1).mergeChar(player.getPlayerCharacter(charIndex2),player.getPlayerCharacter(charIndex3));
+					break;
 				case 2: //Level up characters
 					System.out.println("Enter the number of the character you wish to level up");
 					charIndex1 = Integer.parseInt(input.nextLine());
@@ -149,12 +150,12 @@ public class GachaSimulator {
 					
 					//calls the merge method 
 					player.getPlayerWeapon(weapIndex1).mergeWeap(player.getPlayerWeapon(weapIndex2),player.getPlayerWeapon(weapIndex3));
+					break;
 				case 2: //Level up weapon
 					System.out.println("Enter the number of the weapon you wish to levelup");
 					weapIndex1 = Integer.parseInt(input.nextLine());
 					System.out.println("Enter the Amount of Resource you wish to spend");
 					userChoice = Integer.parseInt(input.nextLine());
-					player.subtractResource(userChoice); //player's amount of resources will be reduced
 					if (player.getResourceAmount() > 0) { //if player has any resources (>0)
 						player.getPlayerWeapon(weapIndex1).weapLevelUp(userChoice); //Levels up the weapon based on amount of resource
 						player.subtractResource(userChoice); //player's amount of resources will be subtracted by the amount they input
