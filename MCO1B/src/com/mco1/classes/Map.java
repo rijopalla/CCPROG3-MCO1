@@ -173,25 +173,31 @@ public class Map {
 		float badPair = (float) -0.25;
 		
 		
+		
 		if (charElement1.equals(charElement2)) //if elements are the same:
 			multiplier = normalPair;			
 		else if (charElement1.equals("joker")) { //if the first element is joker:
 			
-			switch (charElement2) {
+			switch (charElement2) { //checks the element of the second character
 			case "trigger":
 				multiplier = decentPair;
+				System.out.println("Decent pairing!");
 				break;
 			case "metal":
 				multiplier = decentPair;
+				System.out.println("Decent pairing!");
 				break;
 			case "cyclone":
 				multiplier = perfectPair;
+				System.out.println("Perfect pairing!");
 				break;
 			case "luna":
 				multiplier = nicePair;
+				System.out.println("Nice pairing!");
 				break;
 			case "heat":
 				multiplier = nicePair;
+				System.out.println("Nice pairing!");
 				break;
 			}
 		}
@@ -200,6 +206,7 @@ public class Map {
 			switch (charElement2) {
 			case "joker":
 				multiplier = decentPair;
+				System.out.println("Decent pairing!");
 				break;
 			case "metal":
 				multiplier = noEffect;
@@ -209,6 +216,7 @@ public class Map {
 				break;
 			case "luna":
 				multiplier = perfectPair;
+				System.out.println("Perfect pairing!");
 				break;
 			case "heat":
 				multiplier = noEffect;
@@ -220,38 +228,47 @@ public class Map {
 			switch (charElement2) {
 			case "joker":
 				multiplier = decentPair;
+				System.out.println("Decent pairing!");
 				break;
 			case "trigger":
 				multiplier = noEffect;
 				break;
 			case "cyclone":
 				multiplier = decentPair;
+				System.out.println("Decent pairing!");
 				break;
 			case "luna":
 				multiplier = decentPair;
+				System.out.println("Decent pairing!");
 				break;
 			case "heat":
 				multiplier = perfectPair;
+				System.out.println("Perfect pairing!");
 				break;
 			}
 		}
 		else if (charElement1.equals("cyclone")) { //if the first element is cyclone:
 			
-			switch (charElement2) {
+			switch (charElement2) { 
 			case "joker": 
-				multiplier = decentPair; 
+				multiplier = decentPair;
+				System.out.println("Decent pairing!");
 				break;
 			case "trigger":
 				multiplier = decentPair;
+				System.out.println("Decent pairing!");
 				break;
 			case "metal":
 				multiplier = perfectPair;
+				System.out.println("Perfect pairing!");
 				break;
 			case "luna":
 				multiplier = nicePair;
+				System.out.println("Nice pairing!");
 				break;
 			case "heat":
 				multiplier = nicePair;
+				System.out.println("Nice pairing!");
 				break;
 			}
 		}
@@ -260,18 +277,23 @@ public class Map {
 			switch (charElement2) {
 			case "joker":
 				multiplier = nicePair;
+				System.out.println("Nice pairing!");
 				break;
 			case "trigger":
 				multiplier = perfectPair;
+				System.out.println("Perfect pairing!");
 				break;
 			case "metal":
 				multiplier = decentPair;
+				System.out.println("Decent pairing!");
 				break;
 			case "cyclone":
 				multiplier = badPair;
+				System.out.println("Bad pairing!");
 				break;
 			case "heat":
 				multiplier = badPair;
+				System.out.println("Bad pairing!");
 				break;
 			}
 		}
@@ -280,18 +302,22 @@ public class Map {
 			switch (charElement2) {
 			case "joker":
 				multiplier = nicePair;
+				System.out.println("Nice pairing!");
 				break;
 			case "trigger":
 				multiplier = noEffect;
 				break;
 			case "metal":
 				multiplier = perfectPair;
+				System.out.println("Perfect pairing!");
 				break;
 			case "cyclone":
 				multiplier = badPair;
+				System.out.println("Bad pairing!");
 				break;
 			case "luna":
 				multiplier = badPair;
+				System.out.println("Bad pairing!");
 				break;
 			}
 		}
