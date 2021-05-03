@@ -48,12 +48,13 @@ public class Character {
 			this.characterWeapon = null; //remove equipped weapon
 	}
 	
-	public void mergeChar(Character char1, Character char2) {
+	public boolean mergeChar(Character char1, Character char2) {
 		/*mergeCharacter() takes two other characters and merges them into the character
 		* that's calling the method
 		*/
 		
 		//baseCharacter = this character
+		boolean isMerged = false; //value to be returned
 		
 		//1. check if all characters have the same name
 		if (this.characterName.equals(char1.getCharacterName()) && this.characterName.equals(char2.getCharacterName())) {
@@ -65,13 +66,14 @@ public class Character {
 				if (char1.getCharacterWeapon() != null || char2.getCharacterWeapon() != null) {
 					char1.weaponUnequip();
 					char2.weaponUnequip();
-				}
+				} 
 				
 				//3. merge characters
 				if (this.characterRarity < 5) { //checks if Rarity is not maxed (character rarity would have to be 1-4)
 					this.characterRarity++; //adds +1 rarity to character
 					char1 = null; //delete char 1
 					char2 = null; //delete char 2
+					isMerged = true;
 				}
 				else
 					System.out.println("Cannot be merged! Character is already at maximum rarity"); //print error message when character's rarity is already 5
@@ -81,7 +83,7 @@ public class Character {
 		}
 		else
 			System.out.println("Cannot be merged! Characters must have the same name!"); //print error message when characters don't have the same name
-			
+		return isMerged;	
 	}
 	
 	//Getters

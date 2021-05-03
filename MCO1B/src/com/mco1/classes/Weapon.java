@@ -55,11 +55,11 @@ public class Weapon {
 		
 	}
 	
-	public void mergeWeap(Weapon weapon1, Weapon weapon2) {
+	public boolean mergeWeap(Weapon weapon1, Weapon weapon2) {
 		/*mergeWeapon() takes two other weapons and merges them into the weapon
 		* that's calling the method
 		*/
-		
+		boolean isMerged = false; //value to be returned 
 		//1. check if all weapons have the same name
 		if (this.weaponName.equals(weapon1.getWeaponName()) && this.weaponName.equals(weapon2.getWeaponName())) {
 			//2. check if all weapons have the same rarity
@@ -73,6 +73,7 @@ public class Weapon {
 				
 				//3. merge weapons
 				if (this.weaponRarity < 5) {
+					isMerged = true;
 					this.weaponRarity++;
 					weapon1 = null; //deletes weapon1
 					weapon2 = null; //deletes weapon2
@@ -85,6 +86,7 @@ public class Weapon {
 		}
 		else
 			System.out.println("Cannot be merged! Weapons must have the same name!"); //print error message when weapons don't have the same name
+		return isMerged;
 	}
 	
 	//Getters
