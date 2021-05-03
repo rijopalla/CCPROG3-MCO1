@@ -105,6 +105,9 @@ public class GachaSimulator {
 					
 					//calls the merge method 
 					player.getPlayerCharacter(charIndex1).mergeChar(player.getPlayerCharacter(charIndex2),player.getPlayerCharacter(charIndex3));
+					//remove characters from player inventory
+					player.getCharInventory().remove(charIndex2); 
+					player.getCharInventory().remove(charIndex3);
 					break;
 				case 2: //Level up characters
 					System.out.println("Enter the number of the character you wish to level up");
@@ -150,6 +153,9 @@ public class GachaSimulator {
 					
 					//calls the merge method 
 					player.getPlayerWeapon(weapIndex1).mergeWeap(player.getPlayerWeapon(weapIndex2),player.getPlayerWeapon(weapIndex3));
+					//remove weapons from player inventory
+					player.getWepInventory().remove(weapIndex2);
+					player.getWepInventory().remove(weapIndex3);
 					break;
 				case 2: //Level up weapon
 					System.out.println("Enter the number of the weapon you wish to levelup");
