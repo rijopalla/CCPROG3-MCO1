@@ -43,10 +43,10 @@ public class GachaSimulator {
 		
 		//Check if both characters have weapons equipped
 		if (player.getCharInventory().get(charIndex1).getCharacterWeapon() == null && player.getCharInventory().get(charIndex2).getCharacterWeapon() == null)
-			System.out.println("Your characters must have a weapon equipped before going on an adventure!");
+			System.out.println("Error: Your characters must have a weapon equipped before going on an adventure!");
 		else {
 			if (player.getCharInventory().get(charIndex1) == player.getCharInventory().get(charIndex2))
-				System.out.println("Error! Choose another character!");
+				System.out.println("Error: Choose another character!");
 			else {
 				System.out.println("Choose a map: ");
 		
@@ -120,7 +120,7 @@ public class GachaSimulator {
 						System.out.println("Current Resources: " + player.getResourceAmount()); //show player's resources
 					}
 					else
-						System.out.println("Insufficient resources!");
+						System.out.println("Error: Insufficient resources!");
 					break;
 				case 3: //Equip weapon on a character
 					player.displayWeaponInventory();
@@ -182,7 +182,7 @@ public class GachaSimulator {
 						System.out.println("Current Resources: " + player.getResourceAmount()); //show player's resources
 					}
 					else
-						System.out.println("Insufficient resources!");
+						System.out.println("Error: Insufficient resources!");
 					break;
 					}
 				}			
@@ -211,7 +211,7 @@ public class GachaSimulator {
 				    player.displayCharInventory(); //show player's character inventory
 				}
 				else
-					System.out.println("You don't have enough resources!");
+					System.out.println("Error: You don't have enough resources!");
 				break;
 			case 2: //Multi Pull (Char)
 				if (player.getResourceAmount() >= 2700) {  //if player has enough resources to pull (2700)
@@ -220,7 +220,7 @@ public class GachaSimulator {
 					player.displayCharInventory(); //show player's character inventory
 				}
 				else
-					System.out.println("You don't have enough resources!");
+					System.out.println("Error: You don't have enough resources!");
 				break;
 			case 3: //Go back
 				break;
@@ -241,7 +241,7 @@ public class GachaSimulator {
 				    player.displayWeaponInventory(); //show player's weapon inventory
 				}
 				else
-					System.out.println("You don't have enough resources!");
+					System.out.println("Error: You don't have enough resources!");
 				break;
 			case 2: //Multi Pull (Weapon)
 				if (player.getResourceAmount() >= 2700) {  //if player has enough resources to pull (2700)
@@ -250,7 +250,7 @@ public class GachaSimulator {
 					player.displayWeaponInventory(); //show player's weapon inventory
 				}
 				else
-					System.out.println("You don't have enough resources!");
+					System.out.println("Error: You don't have enough resources!");
 				break;
 			}
 		}	
@@ -272,18 +272,18 @@ public class GachaSimulator {
 		userChoice = Integer.parseInt(input.nextLine());
 		
 		if (userChoice == 1) {
-			if (player.getCharInventory().isEmpty()) //checks if characters have characters
+			if (player.getCharInventory().isEmpty()) //checks if players have characters
 				System.out.println("You don't have any characters!");
 			else
 				playerAdventure(player, mapList); //brings up interface for Adventure
 		}
 		else if (userChoice == 2) {
 			if (player.getCharInventory().isEmpty() && player.getWepInventory().isEmpty())
-				System.out.println("Your inventory is empty!");
+				System.out.println("Error: Your inventory is empty!");
 			else if (player.getCharInventory().isEmpty()) 
-				System.out.println("You don't have any characters!");
+				System.out.println("Error: You don't have any characters!");
 			else if (player.getWepInventory().isEmpty())
-				System.out.println("You don't have any weapons!");
+				System.out.println("Error: You don't have any weapons!");
 			else
 				manageInventory(player); //if players have weapons and characters, only then can they proceed to manage their inventory
 		}
@@ -292,7 +292,7 @@ public class GachaSimulator {
 		else if (userChoice == 4)
 			isActive = false;
 		else if (userChoice >= 4 || userChoice <= 1)
-			System.out.println("Invalid input!");
+			System.out.println("Error: Invalid input!");
 	}
 
 	public void start(boolean start) {
