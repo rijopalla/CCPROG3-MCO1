@@ -69,9 +69,18 @@ public class Player {
 		System.out.println("Character: ");
 		
 		for (int i = 0; i < this.characterInventory.size(); i++) { //loop lasts until the size of the arraylist is reached
+			
+			if (this.characterInventory.get(i).getCharacterWeapon() == null) { //if character has no weapon
 			//prints the character's index, name, element, rarity, and level
 			System.out.printf("[%d] Name: %s Element: %s Rarity: %d Level: %d\n", i, this.characterInventory.get(i).getCharacterName(),
 			this.characterInventory.get(i).getCharacterElement(), this.characterInventory.get(i).getCharacterRarity(), this.characterInventory.get(i).getCharacterLevel());
+			}
+			else { //if character has a weapon
+				//prints the character's index, name, element, rarity, level, and name of the weapon equipped
+				System.out.printf("[%d] Name: %s Element: %s Rarity: %d Level: %d, Weapon: \n", i, this.characterInventory.get(i).getCharacterName(),
+				this.characterInventory.get(i).getCharacterElement(), this.characterInventory.get(i).getCharacterRarity(), this.characterInventory.get(i).getCharacterLevel(),
+				this.characterInventory.get(i).getCharacterWeapon());
+			}
 		}
 		
 		System.out.printf("\n");
