@@ -90,6 +90,7 @@ public class GachaSimulator {
 				System.out.println("1. Merge characters");
 				System.out.println("2. Level up character");
 				System.out.println("3. Equip a weapon on a character");
+				System.out.println("4. Unequip a weapon");
 				userChoice = Integer.parseInt(input.nextLine()); //take user input
 				
 				switch(userChoice) {
@@ -130,6 +131,17 @@ public class GachaSimulator {
 					
 					//Equips the weapon to the corresponding character
 					player.getPlayerCharacter(charIndex1).weaponEquip(player.getPlayerWeapon(userChoice));
+					System.out.printf("%s is now equipped with %s!\n", player.getPlayerCharacter(charIndex1).getCharacterName(), player.getPlayerCharacter(charIndex1).getCharacterWeapon().getWeaponName());
+					break;
+				case 4: //Unequip a weapon
+					//show player inventory
+					player.displayCharInventory();
+					//Ask for user input
+					System.out.println("Enter the number of the character: ");
+					charIndex1 = Integer.parseInt(input.nextLine());
+					//unequip
+					player.getPlayerCharacter(charIndex1).weaponUnequip();
+					System.out.println("Weapon unequipped!");
 					break;
 				}
 				
@@ -140,7 +152,6 @@ public class GachaSimulator {
 				System.out.println("Enter the number of the action you wish to execute");
 				System.out.println("1. Merge weapon");
 				System.out.println("2. Level up weapon");
-				System.out.println("3. Equip weapon to character");
 				
 				userChoice = Integer.parseInt(input.nextLine()); //take the next integer input from user
 				
@@ -172,16 +183,6 @@ public class GachaSimulator {
 					}
 					else
 						System.out.println("Insufficient resources!");
-					break;
-				case 3: //Equip weapon on a character
-					System.out.println("Enter the number of the weapon you wish to equip ");
-					weapIndex1 = Integer.parseInt(input.nextLine()); //stores the weapon's index
-					player.displayCharInventory();
-					System.out.println("Enter the number of the character you wish to equip the weapon on");
-					charIndex1 = Integer.parseInt(input.nextLine());
-					
-					//Equips the weapon to the corresponding character
-					player.getPlayerCharacter(charIndex1).weaponEquip(player.getPlayerWeapon(userChoice));
 					break;
 					}
 				}			
@@ -261,7 +262,7 @@ public class GachaSimulator {
 		System.out.println("Current Resources: " + player.getResourceAmount());
 		System.out.println("-------------------------------------------------");
 		
-		System.out.println("------------------------------------");
+		System.out.println("-------------------------------------------------");
 		System.out.println("What action do you want do to next?(Enter 1, 2, or 3)");
 		System.out.println("1. Go on an adventure");
 		System.out.println("2. Manage Characters/Weapons");
@@ -330,7 +331,6 @@ public class GachaSimulator {
 		while (isActive) { //main loop	
 			actionMenu(player, mapList); //brings up Menu for next action
 		 }
-		
 		System.out.println("Thank you for playing!");
 		input.close();
 		System.exit(0);
