@@ -76,13 +76,13 @@ public class GachaMachine {
 															//in order to get rarity (including decimal)
 		if (pullRarity >= 1 && pullRarity <= 5){//1-Rarity = 50% 	
 			listIndex = roll.nextInt(5);  //Randomizes from index 0-5		
-			}
-			else if (pullRarity > 5 && pullRarity <= 8.5){//2-Rarity = 35% 
-				listIndex = 6 + roll.nextInt(5);  //Randomizes from index 6-11
-			}
-			else {//1-Rarity = 15% 
-				listIndex = 12 + roll.nextInt(5);  //Randomizes from index 12-17	
-			}
+		}
+		else if (pullRarity > 5 && pullRarity <= 8.5){//2-Rarity = 35% 
+			listIndex = 6 + roll.nextInt(5);  //Randomizes from index 6-11
+		}
+		else {//1-Rarity = 15% 
+			listIndex = 12 + roll.nextInt(5);  //Randomizes from index 12-17	
+		}
 		
 		return characterList.get(listIndex); //return arrayList object (new character) 
 	}

@@ -1,3 +1,4 @@
+package com.mco1.classes;
 /*
  * main/driver class
  * 
@@ -8,18 +9,13 @@
  */ 
 
 import java.util.Scanner;
-
-import com.mco1.classes.GachaMachine;
-import com.mco1.classes.Map;
-import com.mco1.classes.Player;
-
 import java.util.ArrayList;
 
 public class GachaSimulator {
 	
 	static Scanner input = new Scanner(System.in); //scanner variable that takes string inputs
 	static int userChoice; //int variable for user actions 
-	static boolean isActive = true; //used in main loop
+	static boolean isActive = false; //used in main loop
 	
 	//int variables that store the index of chosen character (based on user input):
 	static int charIndex1 = 0;
@@ -34,7 +30,7 @@ public class GachaSimulator {
 	static GachaMachine machine = new GachaMachine(); //create new gacha machine object
 	
 	//Interface functions
-	private static void playerAdventure(Player player, ArrayList<Map> mapList) {
+	private void playerAdventure(Player player, ArrayList<Map> mapList) {
 		System.out.println("-----------Adventure-----------");
 		System.out.println("Select two characters: ");
 		
@@ -81,7 +77,7 @@ public class GachaSimulator {
 		}
 	}
 	
-	private static void manageInventory(Player player) {
+	private void manageInventory(Player player) {
 		//lets player manage (merge, equip/unequip, level up) their characters and weapons
 		System.out.println("---------Management-------------");
 		System.out.println("Enter 1 to manage Characters or Enter 2 to manage Weapons");
@@ -109,6 +105,7 @@ public class GachaSimulator {
 						System.out.println("Merging successful");
 						player.getCharInventory().remove(charIndex2); 
 						player.getCharInventory().remove(charIndex3);
+						player.displayCharInventory();
 					}
 					break;
 				case 2: //Level up characters
@@ -159,6 +156,7 @@ public class GachaSimulator {
 						System.out.println("Merging successful");
 						player.getWepInventory().remove(weapIndex2); 
 						player.getWepInventory().remove(weapIndex3);
+						player.displayWeaponInventory();
 					}
 					break;
 				case 2: //Level up weapon
@@ -187,7 +185,7 @@ public class GachaSimulator {
 				}			
 	}
 	
-	private static void gacha(Player player) {
+	private void gacha(Player player) {
 		//lets player pull for a character or a weapon, provided they have the necessary resources
 		System.out.println("-------------Gacha------------");
 		System.out.println("What do you want to pull for? (Enter 1 or 2)");
@@ -255,7 +253,7 @@ public class GachaSimulator {
 		}	
 	}
 	
-	private static void actionMenu(Player player, ArrayList<Map> mapList) {
+	private void actionMenu(Player player, ArrayList<Map> mapList) {
 		
 		System.out.println("-------------------------------------------------");
 		System.out.println("Current Resources: " + player.getResourceAmount());
@@ -282,7 +280,10 @@ public class GachaSimulator {
 			System.out.println("Invalid input!");
 	}
 
-	public static void main(String[] args) {
+	public void start(boolean start) {
+		
+		isActive = start;
+		
 		//Maps
 		ArrayList<Map> mapList = new ArrayList<Map>(); //stores the different maps
 		mapList.add(new Map("underground caverns"));
