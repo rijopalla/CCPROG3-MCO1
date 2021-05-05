@@ -77,9 +77,9 @@ public class Player {
 			}
 			else { //if character has a weapon
 				//prints the character's index, name, element, rarity, level, and name of the weapon equipped
-				System.out.printf("[%d] Name: %s Element: %s Rarity: %d Level: %d, Weapon: \n", i, this.characterInventory.get(i).getCharacterName(),
+				System.out.printf("[%d] Name: %s Element: %s Rarity: %d Level: %d, Weapon: %s \n", i, this.characterInventory.get(i).getCharacterName(),
 				this.characterInventory.get(i).getCharacterElement(), this.characterInventory.get(i).getCharacterRarity(), this.characterInventory.get(i).getCharacterLevel(),
-				this.characterInventory.get(i).getCharacterWeapon());
+				this.characterInventory.get(i).getCharacterWeapon().getWeaponName());
 			}
 		}
 		
