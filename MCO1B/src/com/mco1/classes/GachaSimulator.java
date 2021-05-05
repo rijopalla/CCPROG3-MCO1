@@ -47,34 +47,34 @@ public class GachaSimulator {
 		else {
 			if (player.getCharInventory().get(charIndex1) == player.getCharInventory().get(charIndex2))
 				System.out.println("Error! Choose another character!");
+			else {
+				System.out.println("Choose a map: ");
 		
-			System.out.println("Choose a map: ");
+				for (int j = 0; j < mapList.size(); j++) //displays map names
+					System.out.printf("[%d] %s\n", j, mapList.get(j).getMapName());
+			
+				int mapChoice = Integer.parseInt(input.nextLine());
 		
-			for (int j = 0; j < mapList.size(); j++) { //displays map names
-				System.out.printf("[%d] %s\n", j, mapList.get(j).getMapName());
-			}
-		
-			int mapChoice = Integer.parseInt(input.nextLine());
-		
-			switch(mapChoice) {
-			case 0: //underground caverns
-				//player gets resources from the map and the total no. of resources is increased
-				player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
-				break;
-			case 1: //forest of enchantments
-				player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
-				break;
-			case 2: //sea of hope
-				player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
-				break;
-			case 3: //tower of ether
-				player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
-				break;
-			case 4: //celestial plane
-				player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
-				break;
-			}
-		}
+				switch(mapChoice) {
+				case 0: //underground caverns
+					//player gets resources from the map and the total no. of resources is increased
+					player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
+					break;
+				case 1: //forest of enchantments
+					player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
+					break;
+				case 2: //sea of hope
+					player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
+					break;
+				case 3: //tower of ether
+					player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
+					break;
+				case 4: //celestial plane
+					player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
+					break;
+			  }
+		   }
+	    }		
 	}
 	
 	private void manageInventory(Player player) {
@@ -113,9 +113,10 @@ public class GachaSimulator {
 					charIndex1 = Integer.parseInt(input.nextLine());
 					System.out.println("Enter the Amount of Resource you wish to spend");
 					userChoice = Integer.parseInt(input.nextLine());
-					if (player.getResourceAmount() > 0) { //if player has any resources (>0)
+					if (player.getResourceAmount() > 0 && userChoice <= player.getResourceAmount()) { //if player has any resources (>0) & userInput is within bounds
 						player.getPlayerCharacter(charIndex1).charLevelUp(userChoice); //Levels up the character based on amount of resource
 						player.subtractResource(userChoice); //player's amount of resources will be subtracted by the amount they input
+						System.out.println("Current Resources: " + player.getResourceAmount()); //show player's resources
 					}
 					else
 						System.out.println("Insufficient resources!");
@@ -164,9 +165,10 @@ public class GachaSimulator {
 					weapIndex1 = Integer.parseInt(input.nextLine());
 					System.out.println("Enter the Amount of Resource you wish to spend");
 					userChoice = Integer.parseInt(input.nextLine());
-					if (player.getResourceAmount() > 0) { //if player has any resources (>0)
+					if (player.getResourceAmount() > 0 && userChoice <= player.getResourceAmount()) { //if player has any resources (>0)
 						player.getPlayerWeapon(weapIndex1).weapLevelUp(userChoice); //Levels up the weapon based on amount of resource
 						player.subtractResource(userChoice); //player's amount of resources will be subtracted by the amount they input
+						System.out.println("Current Resources: " + player.getResourceAmount()); //show player's resources
 					}
 					else
 						System.out.println("Insufficient resources!");
@@ -268,10 +270,22 @@ public class GachaSimulator {
 		System.out.println("-------------------------------------------------");
 		userChoice = Integer.parseInt(input.nextLine());
 		
-		if (userChoice == 1)
-			playerAdventure(player, mapList); //brings up interface for Adventure
-		else if (userChoice == 2)
-			manageInventory(player);
+		if (userChoice == 1) {
+			if (player.getCharInventory().isEmpty()) //checks if characters have characters
+				System.out.println("You don't have any characters!");
+			else
+				playerAdventure(player, mapList); //brings up interface for Adventure
+		}
+		else if (userChoice == 2) {
+			if (player.getCharInventory().isEmpty() && player.getWepInventory().isEmpty())
+				System.out.println("Your inventory is empty!");
+			else if (player.getCharInventory().isEmpty()) 
+				System.out.println("You don't have any characters!");
+			else if (player.getWepInventory().isEmpty())
+				System.out.println("You don't have any weapons!");
+			else
+				manageInventory(player); //if players have weapons and characters, only then can they proceed to manage their inventory
+		}
 		else if (userChoice == 3)
 			gacha(player);
 		else if (userChoice == 4)
