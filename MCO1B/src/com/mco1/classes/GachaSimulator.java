@@ -36,55 +36,62 @@ public class GachaSimulator {
 		String quit = "quit";
 		
 		System.out.println("-----------Adventure-----------");
-		System.out.println("Current inventory: ");
-		//Show player's character inventory
-		player.displayCharInventory();
-		
-		System.out.println("Enter 'continue' to proceed with adventure");
-		System.out.println("Enter 'quit' to go back to menu");
-		if (quit.equals(input.nextLine()))
-			start = false;
-		else
-			while(start) {
-			System.out.println("Select two characters: ");
-			//store following input to charIndex variables
-			charIndex1 = Integer.parseInt(input.nextLine());
-			charIndex2 = Integer.parseInt(input.nextLine());
+		while(start) {
+			System.out.println("Current inventory: ");
+			//Show player's character inventory
+			player.displayCharInventory();
 			
-			//Check if both characters have weapons equipped
-			if (player.getCharInventory().get(charIndex1).getCharacterWeapon() == null && player.getCharInventory().get(charIndex2).getCharacterWeapon() == null) {
-				System.out.println("Error: Your characters must have a weapon equipped before going on an adventure!");
+			System.out.println("Enter 'continue' to proceed with adventure");
+			System.out.println("Enter 'quit' to go back to menu");
+			if (quit.equals(input.nextLine()))
 				start = false;
-			}
-			else {
-				if (player.getCharInventory().get(charIndex1) == player.getCharInventory().get(charIndex2))
-					System.out.println("Error: Choose another character!");
-				else {
-					System.out.println("Choose a map: ");
-			
-					for (int j = 0; j < mapList.size(); j++) //displays map names
-						System.out.printf("[%d] %s\n", j, mapList.get(j).getMapName());
+			else
+				System.out.println("Select two characters: ");
+				//store following input to charIndex variables
+				charIndex1 = Integer.parseInt(input.nextLine());
+				charIndex2 = Integer.parseInt(input.nextLine());
 				
-					int mapChoice = Integer.parseInt(input.nextLine());
-			
-					switch(mapChoice) {
-					case 0: //underground caverns
-						//player gets resources from the map and the total no. of resources is increased
-						player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
-						break;
-					case 1: //forest of enchantments
-						player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
-						break;
-					case 2: //sea of hope
-						player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
-						break;
-					case 3: //tower of ether
-						player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
-						break;
-					case 4: //celestial plane
-						player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
-						break;
-				  }
+				//Check if both characters have weapons equipped
+				if (player.getCharInventory().get(charIndex1).getCharacterWeapon() == null && player.getCharInventory().get(charIndex2).getCharacterWeapon() == null) {
+					System.out.println("Error: Your characters must have a weapon equipped before going on an adventure!");
+					start = false;
+				}
+				else {
+					if (player.getCharInventory().get(charIndex1) == player.getCharInventory().get(charIndex2))
+						System.out.println("Error: Choose another character!");
+					else {
+						System.out.println("Choose a map: ");
+				
+						for (int j = 0; j < mapList.size(); j++) //displays map names
+							System.out.printf("[%d] %s\n", j, mapList.get(j).getMapName());
+					
+						int mapChoice = Integer.parseInt(input.nextLine());
+				
+						switch(mapChoice) {
+						case 0: //underground caverns
+							//player gets resources from the map and the total no. of resources is increased
+							player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
+							break;
+						case 1: //forest of enchantments
+							player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
+							break;
+						case 2: //sea of hope
+							player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
+							break;
+						case 3: //tower of ether
+							player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
+							break;
+						case 4: //celestial plane
+							player.addResource(mapList.get(mapChoice).adventure(player.getPlayerCharacter(charIndex1), player.getPlayerCharacter(charIndex2)));
+							break;
+					  }
+						System.out.println("Current Resources: " + player.getResourceAmount());
+						System.out.println("Do you want to do another adventure?");
+						System.out.println("Input 'continue' or 'quit'");
+						if (quit.equalsIgnoreCase(input.nextLine()))
+							start = false;
+						else
+							continue;
 			   }
 		    }
 		  }
@@ -129,7 +136,7 @@ public class GachaSimulator {
 					case 2: //Level up characters
 						System.out.println("Enter the number of the character you wish to level up");
 						charIndex1 = Integer.parseInt(input.nextLine());
-						System.out.println("Enter the Amount of Resource you wish to spend");
+						System.out.println("Enter the amount of resources you wish to spend");
 						userChoice = Integer.parseInt(input.nextLine());
 						if (player.getResourceAmount() > 0 && userChoice <= player.getResourceAmount()) { //if player has any resources (>0) & userInput is within bounds
 							player.getPlayerCharacter(charIndex1).charLevelUp(userChoice); //Levels up the character based on amount of resource
@@ -143,25 +150,41 @@ public class GachaSimulator {
 						break;
 					case 3: //Equip weapon on a character
 						player.displayWeaponInventory();
-						System.out.println("Enter the number of the weapon you wish to equip ");
-						userChoice = Integer.parseInt(input.nextLine()); //stores the weapon's index
-						System.out.println("Enter the number of the character you wish to equip the weapon on");
-						charIndex1 = Integer.parseInt(input.nextLine());
-						
-						//Equips the weapon to the corresponding character
-						player.getPlayerCharacter(charIndex1).weaponEquip(player.getPlayerWeapon(userChoice));
-						System.out.printf("%s is now equipped with %s!\n", player.getPlayerCharacter(charIndex1).getCharacterName(), player.getPlayerCharacter(charIndex1).getCharacterWeapon().getWeaponName());
+						if(player.getCharInventory().isEmpty() == false && player.getWepInventory().isEmpty() == false) { //if player has weapons and characters:
+							System.out.println("Enter the number of the weapon you wish to equip ");
+							userChoice = Integer.parseInt(input.nextLine()); //stores the weapon's index
+							System.out.println("Enter the number of the character you wish to equip the weapon on");
+							charIndex1 = Integer.parseInt(input.nextLine());
+							
+							//Equips the weapon to the corresponding character
+							player.getPlayerCharacter(charIndex1).weaponEquip(player.getPlayerWeapon(userChoice));
+							System.out.printf("%s is now equipped with %s!\n", player.getPlayerCharacter(charIndex1).getCharacterName(), player.getPlayerCharacter(charIndex1).getCharacterWeapon().getWeaponName());
+							break;
+						}
+						else {
+							if (player.getCharInventory().isEmpty())
+								System.out.println("You don't have any characters!");
+							else if (player.getWepInventory().isEmpty())
+								System.out.println("You don't have any weapons");
+						}
 						break;
 					case 4: //Unequip a weapon
-						//show player inventory
-						player.displayCharInventory();
-						//Ask for user input
-						System.out.println("Enter the number of the character: ");
-						charIndex1 = Integer.parseInt(input.nextLine());
-						//unequip
-						player.getPlayerCharacter(charIndex1).weaponUnequip();
-						System.out.println("Weapon unequipped!");
-						break;
+						if (player.getCharInventory().isEmpty() == false) {
+							//
+							//show player inventory
+							player.displayCharInventory();
+							//Ask for user input
+							System.out.println("Enter the number of the character with a weapon you wish to unequip: ");
+							charIndex1 = Integer.parseInt(input.nextLine());
+							//unequip
+							player.getPlayerCharacter(charIndex1).weaponUnequip();
+							System.out.println("Weapon unequipped!");
+							break;
+						}
+						else {
+							System.out.println("Error: You don't have any characters");
+						}
+						
 					case 5:
 						break;
 					}
@@ -214,6 +237,9 @@ public class GachaSimulator {
 						System.out.println("You don't have any characters!\n");
 					else
 						System.out.print("You don't have any weapons!\n");
+				}
+				else if(userChoice < 1 || userChoice > 3) {
+					System.out.println("Error: Invalid input!");
 				}
 
 		}
@@ -289,8 +315,10 @@ public class GachaSimulator {
 				break;
 			}
 		}
-		else
+		else if (userChoice == 3)
 			isActive = false;
+		else if (userChoice > 3 || userChoice < 1)
+			System.out.println("Error: Invalid input");
 	  }
 	}
 	
