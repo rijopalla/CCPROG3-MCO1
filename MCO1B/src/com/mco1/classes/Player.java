@@ -34,11 +34,11 @@ public class Player {
 	}
 	
 	public void addCharacter(Character chara) {
-		this.characterInventory.add(chara); //adds chara parameter to the character's inventory
+		this.characterInventory.add(new Character(chara.getCharacterName(), chara.getCharacterRarity(), chara.getCharacterElement())); //adds chara parameter to the character's inventory
 	}
 	
 	public void addWeapon(Weapon weap) {
-		this.weaponInventory.add(weap); //adds weap parameter to the character's inventory
+		this.weaponInventory.add(new Weapon(weap.getWeaponName(), weap.getWeaponPower(), weap.getWeaponRarity())); //adds weap parameter to the character's inventory
 	}
 	
 	public int addResource(int num) {
