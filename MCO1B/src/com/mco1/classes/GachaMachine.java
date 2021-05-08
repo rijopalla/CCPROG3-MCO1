@@ -84,7 +84,9 @@ public class GachaMachine {
 			listIndex = 12 + roll.nextInt(5);  //Randomizes from index 12-17	
 		}
 		
-		return characterList.get(listIndex); //return arrayList object (new character) 
+		return new Character(characterList.get(listIndex).getCharacterName(), 
+				characterList.get(listIndex).getCharacterRarity(), 
+				characterList.get(listIndex).getCharacterElement()); //return arrayList object (new character) 
 	}
 	
 	public ArrayList<Character> charMultiPull() {
@@ -112,7 +114,9 @@ public class GachaMachine {
 			listIndex = 12 + roll.nextInt(5);  //Randomizes from index 12-17	
 		}	
 		
-		return weaponList.get(listIndex);//Passes arrayList object to player method	
+		return new Weapon(weaponList.get(listIndex).getWeaponName(),
+				weaponList.get(listIndex).getWeaponPower(), 
+				weaponList.get(listIndex).getWeaponRarity());//Passes arrayList object to player method	
 	}
 	
 	public ArrayList<Weapon> weapMultiPull() {
