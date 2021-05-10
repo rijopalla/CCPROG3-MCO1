@@ -167,7 +167,7 @@ public class GachaSimulator {
 						}
 						else if (this.player.getPlayerCharacter(charIndex1).getCharacterLevel() >= 100)
 							System.out.println("Character has already reached maximum level!");
-						else if (this.player.getResourceAmount() > 0 && resourceNum <= this.player.getResourceAmount())
+						else 
 							System.out.println("Error: Insufficient resources!");
 					}
 					break;
@@ -258,7 +258,7 @@ public class GachaSimulator {
 							}
 							else if (this.player.getPlayerWeapon(weapIndex1).getWeaponLevel() >= 50)
 								System.out.println("Weapon has already reached maximum level!");
-							else if (this.player.getResourceAmount() > 0 && resourceNum <= this.player.getResourceAmount())
+							else
 								System.out.println("Error: Insufficient resources!");
 						 }
 						 break;
