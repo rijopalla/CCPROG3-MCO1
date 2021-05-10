@@ -110,6 +110,7 @@ public class GachaSimulator {
 		
 		boolean isRunning = true;
 		int resourceNum = 0; //stores user input for resources (used in level up)
+		
 		while (isRunning) {
 			
 			System.out.println("---------Management-------------");
@@ -376,7 +377,6 @@ public class GachaSimulator {
 	
 	private void actionMenu() {
 		
-		try {
 		int userChoice; //int variable for user actions 
 		System.out.println("-------------------------------------------------");
 		System.out.println("Current Resources: " + this.player.getResourceAmount());
@@ -409,10 +409,6 @@ public class GachaSimulator {
 			isActive = false;
 		else
 			System.out.println("Error: Invalid input!");
-		}
-		catch (Exception e) {
-			System.out.println("Invalid input!");
-		}
 	}
 
 	public void start(boolean start) {
