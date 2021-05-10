@@ -47,12 +47,14 @@ public class Weapon {
 		
 		//weapon only levels up if resource amount > 0 and weapon's level < max level (50)
 		if (resourceNum > 0 && this.weaponLevel < 50) {
-			
 			//character levels up until loop reaches input
-			for (int i = 0; i < resourceNum; i++) 
-				this.weaponLevel++;
+			for (int i = 0; i < resourceNum; i++) {
+				if (this.weaponLevel >= 50)
+					break;
+				else
+					this.weaponLevel++;
+			}
 		}
-		
 	}
 	
 	public boolean mergeWeap(Weapon weapon1, Weapon weapon2) {

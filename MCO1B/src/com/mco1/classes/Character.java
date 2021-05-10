@@ -19,17 +19,16 @@ public class Character {
 	//Methods
 	public void charLevelUp(int resourceNum) {
 		//takes the allotted resources as an input
-		
 		//character only levels up if resource amount > 0 and character level < max level (100)
 		if (resourceNum > 0 && this.characterLevel < 100) {
 			//character levels up until loop reaches input
-			for (int i = 0; i < resourceNum; i++) 
-				this.characterLevel++;
+			for (int i = 0; i < resourceNum; i++) {
+				if (this.characterLevel >= 100)
+					break;
+				else
+					this.characterLevel++;
+			} 
 		}
-		else if (this.characterLevel >= 100) {
-			System.out.print("You have reached the maximum level");
-		}
-		
 	}
 	
 	public void weaponEquip(Weapon wep){
