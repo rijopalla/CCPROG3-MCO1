@@ -9,20 +9,14 @@ public class GachaSimulator {
 	private int userChoice; //int variable for user actions 
 	private boolean isActive = false; //used in main loop
 	
-	//int variables that store the index of chosen character (based on user input):
-	private int charIndex1 = 0;
-	private int charIndex2 = 0;
-	private int charIndex3 = 0;
-	
-	//int variables that store the index of chosen weapon (based on user input):
-	private int weapIndex1 = 0; 
-	private int weapIndex2 = 0; 
-	private int weapIndex3 = 0;
-	
 	static GachaMachine machine = new GachaMachine(); //create new gacha machine object
 	
 	//Interface functions
 	private void playerAdventure(Player player, ArrayList<Map> mapList) {
+		
+		//int variables that store the index of chosen character (based on user input):
+		int charIndex1 = 0;
+		int charIndex2 = 0;
 		
 		boolean start = true;
 		String quit = "quit";
@@ -94,6 +88,16 @@ public class GachaSimulator {
 	
 	private void manageInventory(Player player) {
 		//lets player manage (merge, equip/unequip, level up) their characters and weapons
+		//int variables that store the index of chosen character (based on user input):
+		int charIndex1 = 0;
+		int charIndex2 = 0;
+		int charIndex3 = 0;
+		
+		//int variables that store the index of chosen weapon (based on user input):
+		int weapIndex1 = 0; 
+		int weapIndex2 = 0; 
+		int weapIndex3 = 0;
+		
 		boolean isRunning = true;
 		int resourceNum = 0; //stores user input for resources (used in level up)
 		while (isRunning) {
