@@ -1,3 +1,11 @@
+/*
+ * main/driver class
+ * 
+ * Group 10: Opalla, Rijan & Tipan, Loben Klien
+ *
+ * Latest edit: 5/10/2021
+ * 
+ */ 
 import com.mco1.classes.GachaSimulator;
 
 public class Main {
