@@ -77,6 +77,9 @@ public class GachaSimulator {
 						case 4: //celestial plane
 							this.player.addResource(this.mapList.get(mapChoice).adventure(this.player.getPlayerCharacter(charIndex1), this.player.getPlayerCharacter(charIndex2)));
 							break;
+						default:
+							System.out.println("Enter a valid response!");
+							break;
 					  }
 						System.out.println("Current Resources: " + this.player.getResourceAmount());
 						System.out.println("Do you want to do another adventure?");
@@ -209,7 +212,10 @@ public class GachaSimulator {
 					break;
 				case 5:
 					break;
-					}
+				default:
+					System.out.println("Enter a valid response!");
+					break;
+				  }
 				}
 				else if (userChoice == 2 && this.player.getWepInventory().isEmpty() == false) { //Weapon
 					System.out.println("---------Weapon Management-------------");
@@ -263,6 +269,9 @@ public class GachaSimulator {
 							else
 								System.out.println("Error: Insufficient resources!");
 						 }
+						 break;
+					 default:
+						 System.out.println("Enter a valid response!");
 						 break;
 					}
 				}
@@ -321,6 +330,9 @@ public class GachaSimulator {
 				break;
 			case 3: //Go back
 				break;
+			default:
+				System.out.println("Enter a default response!");
+				break;
 			}
 		}
 		else if (userChoice == 2) {
@@ -351,11 +363,14 @@ public class GachaSimulator {
 				else
 					System.out.println("Error: You don't have enough resources!");
 				break;
+			default:
+				System.out.println("Enter a valid response!");
+				break;
 			}
 		}
 		else if (userChoice == 3)
 			isActive = false;
-		else if (userChoice > 3 || userChoice < 1)
+		else
 			System.out.println("Error: Invalid input");
 	  }
 	}
