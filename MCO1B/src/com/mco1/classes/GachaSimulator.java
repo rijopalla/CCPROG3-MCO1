@@ -31,7 +31,7 @@ public class GachaSimulator {
 			
 			System.out.println("Enter 'continue' to proceed with adventure");
 			System.out.println("Enter 'quit' to go back to menu");
-			if (quit.equals(input.nextLine())) {
+			if (quit.equalsIgnoreCase(input.nextLine())) {
 				start = false;
 				break;
 			}
