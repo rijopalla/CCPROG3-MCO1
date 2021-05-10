@@ -5,19 +5,19 @@ import java.util.ArrayList;
 
 public class GachaSimulator {
 	
-	private static Scanner input = new Scanner(System.in); //scanner variable that takes string inputs
-	private static int userChoice; //int variable for user actions 
-	private static boolean isActive = false; //used in main loop
+	private Scanner input = new Scanner(System.in); //scanner variable that takes string inputs
+	private int userChoice; //int variable for user actions 
+	private boolean isActive = false; //used in main loop
 	
 	//int variables that store the index of chosen character (based on user input):
-	private static int charIndex1 = 0;
-	private static int charIndex2 = 0;
-	private static int charIndex3 = 0;
+	private int charIndex1 = 0;
+	private int charIndex2 = 0;
+	private int charIndex3 = 0;
 	
 	//int variables that store the index of chosen weapon (based on user input):
-	private static int weapIndex1 = 0; 
-	private static int weapIndex2 = 0; 
-	private static int weapIndex3 = 0;
+	private int weapIndex1 = 0; 
+	private int weapIndex2 = 0; 
+	private int weapIndex3 = 0;
 	
 	static GachaMachine machine = new GachaMachine(); //create new gacha machine object
 	
