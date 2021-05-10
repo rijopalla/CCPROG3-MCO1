@@ -1,12 +1,5 @@
 package com.mco1.classes;
-/*
- * main/driver class
- * 
- * Group 10: Opalla, Rijan & Tipan, Loben Klien
- *
- * Latest edit: 5/1/2021
- * 
- */ 
+
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -106,88 +99,89 @@ public class GachaSimulator {
 			System.out.println("Enter 1 to manage Characters or Enter 2 to manage Weapons or Enter 3 to go back");
 			userChoice = Integer.parseInt(input.nextLine());
 		
-				if (userChoice == 1 && player.getCharInventory().isEmpty() == false) { //Character
-					System.out.println("---------Character Management-------------");
-					player.displayCharInventory(); // display Character Inventory
-					System.out.println("Enter the number of the action you wish to execute");
-					System.out.println("1. Merge characters");
-					System.out.println("2. Level up character");
-					System.out.println("3. Equip a weapon on a character");
-					System.out.println("4. Unequip a weapon");
-					System.out.println("5. Go back");
-					userChoice = Integer.parseInt(input.nextLine()); //take user input
-					
-					switch(userChoice) {
-					case 1: //Merge characters
-						System.out.println("Enter the number of the (3) characters you wish to merge");
-						charIndex1 = Integer.parseInt(input.nextLine()); //store index of first character
-						charIndex2 = Integer.parseInt(input.nextLine()); //store index of second character
-						charIndex3 = Integer.parseInt(input.nextLine()); //store index of third character
+			if (userChoice == 1 && player.getCharInventory().isEmpty() == false) { //Character
+				System.out.println("---------Character Management-------------");
+				player.displayCharInventory(); // display Character Inventory
+				System.out.println("Enter the number of the action you wish to execute");
+				System.out.println("1. Merge characters");
+				System.out.println("2. Level up character");
+				System.out.println("3. Equip a weapon on a character");
+				System.out.println("4. Unequip a weapon");
+				System.out.println("5. Go back");
+				userChoice = Integer.parseInt(input.nextLine()); //take user input
+				
+				
+				switch(userChoice) {
+				case 1: //Merge characters
+					System.out.println("Enter the number of the (3) characters you wish to merge");
+					charIndex1 = Integer.parseInt(input.nextLine()); //store index of first character
+					charIndex2 = Integer.parseInt(input.nextLine()); //store index of second character
+					charIndex3 = Integer.parseInt(input.nextLine()); //store index of third character
 						
-						//calls the merge method 
-						if (player.getPlayerCharacter(charIndex1).mergeChar(player.getPlayerCharacter(charIndex2),player.getPlayerCharacter(charIndex3))) {
-							//if merging is successful, remove characters from player's inventory
-							System.out.println("Merging successful");
-							player.getCharInventory().remove(charIndex2); 
-							player.getCharInventory().remove(charIndex3);
-							player.displayCharInventory();
-						}
-						break;
-					case 2: //Level up characters
-						System.out.println("Enter the number of the character you wish to level up");
+					//calls the merge method 
+					if (player.getPlayerCharacter(charIndex1).mergeChar(player.getPlayerCharacter(charIndex2),player.getPlayerCharacter(charIndex3))) {
+						//if merging is successful, remove characters from player's inventory
+						System.out.println("Merging successful");
+						player.getCharInventory().remove(charIndex2); 
+						player.getCharInventory().remove(charIndex3-1);
+						player.displayCharInventory();
+					}
+					break;
+				case 2: //Level up characters
+					System.out.println("Enter the number of the character you wish to level up");
+					charIndex1 = Integer.parseInt(input.nextLine());
+					System.out.println("Enter the amount of resources you wish to spend");
+					userChoice = Integer.parseInt(input.nextLine());
+					if (player.getResourceAmount() > 0 && userChoice <= player.getResourceAmount()) { //if player has any resources (>0) & userInput is within bounds
+						player.getPlayerCharacter(charIndex1).charLevelUp(userChoice); //Levels up the character based on amount of resource
+						player.subtractResource(userChoice); //player's amount of resources will be subtracted by the amount they input
+						System.out.printf("Level up! %s's level is now: %d!\n", player.getPlayerCharacter(charIndex1).getCharacterName(),
+								player.getPlayerCharacter(charIndex1).getCharacterLevel());
+						System.out.println("Current Resources: " + player.getResourceAmount()); //show player's resources
+					}
+					else
+						System.out.println("Error: Insufficient resources!");
+					break;
+				case 3: //Equip weapon on a character
+					player.displayWeaponInventory();
+					if(player.getCharInventory().isEmpty() == false && player.getWepInventory().isEmpty() == false) { //if player has weapons and characters:
+						System.out.println("Enter the number of the weapon you wish to equip ");
+						userChoice = Integer.parseInt(input.nextLine()); //stores the weapon's index
+						System.out.println("Enter the number of the character you wish to equip the weapon on");
 						charIndex1 = Integer.parseInt(input.nextLine());
-						System.out.println("Enter the amount of resources you wish to spend");
-						userChoice = Integer.parseInt(input.nextLine());
-						if (player.getResourceAmount() > 0 && userChoice <= player.getResourceAmount()) { //if player has any resources (>0) & userInput is within bounds
-							player.getPlayerCharacter(charIndex1).charLevelUp(userChoice); //Levels up the character based on amount of resource
-							player.subtractResource(userChoice); //player's amount of resources will be subtracted by the amount they input
-							System.out.printf("Level up! %s's level is now: %d!\n", player.getPlayerCharacter(charIndex1).getCharacterName(),
-									player.getPlayerCharacter(charIndex1).getCharacterLevel());
-							System.out.println("Current Resources: " + player.getResourceAmount()); //show player's resources
-						}
-						else
-							System.out.println("Error: Insufficient resources!");
-						break;
-					case 3: //Equip weapon on a character
-						player.displayWeaponInventory();
-						if(player.getCharInventory().isEmpty() == false && player.getWepInventory().isEmpty() == false) { //if player has weapons and characters:
-							System.out.println("Enter the number of the weapon you wish to equip ");
-							userChoice = Integer.parseInt(input.nextLine()); //stores the weapon's index
-							System.out.println("Enter the number of the character you wish to equip the weapon on");
-							charIndex1 = Integer.parseInt(input.nextLine());
-							
-							//Equips the weapon to the corresponding character
-							player.getPlayerCharacter(charIndex1).weaponEquip(player.getPlayerWeapon(userChoice));
-							System.out.printf("%s is now equipped with %s!\n", player.getPlayerCharacter(charIndex1).getCharacterName(), player.getPlayerCharacter(charIndex1).getCharacterWeapon().getWeaponName());
-							break;
-						}
-						else {
-							if (player.getCharInventory().isEmpty())
-								System.out.println("You don't have any characters!");
-							else if (player.getWepInventory().isEmpty())
-								System.out.println("You don't have any weapons");
-						}
-						break;
-					case 4: //Unequip a weapon
-						if (player.getCharInventory().isEmpty() == false) {
-							//
-							//show player inventory
-							player.displayCharInventory();
-							//Ask for user input
-							System.out.println("Enter the number of the character with a weapon you wish to unequip: ");
-							charIndex1 = Integer.parseInt(input.nextLine());
-							//unequip
-							player.getPlayerCharacter(charIndex1).weaponUnequip();
-							System.out.println("Weapon unequipped!");
-							break;
-						}
-						else {
-							System.out.println("Error: You don't have any characters");
-						}
 						
-					case 5:
+						//Equips the weapon to the corresponding character
+						player.getPlayerCharacter(charIndex1).weaponEquip(player.getPlayerWeapon(userChoice));
+						System.out.printf("%s is now equipped with %s!\n", player.getPlayerCharacter(charIndex1).getCharacterName(), player.getPlayerCharacter(charIndex1).getCharacterWeapon().getWeaponName());
 						break;
 					}
+					else {
+						if (player.getCharInventory().isEmpty())
+							System.out.println("You don't have any characters!");
+						else if (player.getWepInventory().isEmpty())
+							System.out.println("You don't have any weapons");
+					}
+					break;
+				case 4: //Unequip a weapon
+					if (player.getCharInventory().isEmpty() == false) {
+						//
+						//show player inventory
+						player.displayCharInventory();
+						//Ask for user input
+						System.out.println("Enter the number of the character with a weapon you wish to unequip: ");
+						charIndex1 = Integer.parseInt(input.nextLine());
+						//unequip
+						player.getPlayerCharacter(charIndex1).weaponUnequip();
+						System.out.println("Weapon unequipped!");
+						break;
+					}
+					else {
+						System.out.println("Error: You don't have any characters");
+					}
+						
+				case 5:
+					break;
+				}
 				}
 				else if (userChoice == 2 && player.getWepInventory().isEmpty() == false) { //Weapon
 					System.out.println("---------Weapon Management-------------");
@@ -211,7 +205,7 @@ public class GachaSimulator {
 							//if merging is successful, remove weapons from player's inventory
 							System.out.println("Merging successful");
 							player.getWepInventory().remove(weapIndex2); 
-							player.getWepInventory().remove(weapIndex3);
+							player.getWepInventory().remove(weapIndex3-1);
 							player.displayWeaponInventory();
 						}
 						break;
