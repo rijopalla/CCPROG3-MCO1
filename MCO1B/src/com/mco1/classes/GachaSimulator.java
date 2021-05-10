@@ -210,7 +210,7 @@ public class GachaSimulator {
 					else 
 						System.out.println("Error! This character doesn't have a weapon equipped!");
 					break;
-				case 5:
+				case 5: //Go back
 					break;
 				default:
 					System.out.println("Enter a valid response!");
@@ -256,8 +256,8 @@ public class GachaSimulator {
 						else {
 							System.out.println("Enter the Amount of Resource you wish to spend");
 							resourceNum = Integer.parseInt(input.nextLine());
-						
-							if (this.player.getResourceAmount() > 0 && resourceNum <= this.player.getResourceAmount() && this.player.getPlayerWeapon(weapIndex1).getWeaponLevel() < 50) { //if player has any resources (>0) and weapon level < maximum
+							//if player has any resources (>0) and weapon level < maximum
+							if (this.player.getResourceAmount() > 0 && resourceNum <= this.player.getResourceAmount() && this.player.getPlayerWeapon(weapIndex1).getWeaponLevel() < 50) { 
 								this.player.getPlayerWeapon(weapIndex1).weapLevelUp(resourceNum); //Levels up the weapon based on amount of resource
 								System.out.printf("Level up! %s's level is now: %d!\n", this.player.getPlayerWeapon(weapIndex1).getWeaponName(),
 										this.player.getPlayerWeapon(weapIndex1).getWeaponLevel());
@@ -449,5 +449,5 @@ public class GachaSimulator {
 		System.out.println("Thank you for playing!");
 		input.close();
 		System.exit(0);
-  }
+    }
 }
