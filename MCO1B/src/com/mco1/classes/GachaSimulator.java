@@ -83,9 +83,9 @@ public class GachaSimulator {
 							start = false;
 						else
 							continue;
-			   }
-		    }
-		  }
+					}
+				}
+		  	}
 		}
 	
 	private void manageInventory() {
