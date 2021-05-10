@@ -31,11 +31,12 @@ public class GachaSimulator {
 			
 			System.out.println("Enter 'continue' to proceed with adventure");
 			System.out.println("Enter 'quit' to go back to menu");
-			if (quit.equalsIgnoreCase(input.nextLine())) {
+			String userInput = input.nextLine();
+			if (userInput.equalsIgnoreCase(quit)) {
 				start = false;
 				break;
 			}
-			else {
+			else if (userInput.equalsIgnoreCase("continue")){
 				System.out.println("Select two characters: ");
 				//store following input to charIndex variables
 				charIndex1 = Integer.parseInt(input.nextLine());
@@ -84,14 +85,11 @@ public class GachaSimulator {
 					  }
 						System.out.println("Current Resources: " + this.player.getResourceAmount());
 						System.out.println("Do you want to do another adventure?");
-						System.out.println("Input 'continue' or 'quit'");
-						if (quit.equalsIgnoreCase(input.nextLine()))
-							start = false;
-						else
-							continue;
 					}
 				}
 			}
+			else
+				System.out.println("Error! Invalid input!");
 		}
 	 }
 	
@@ -300,7 +298,7 @@ public class GachaSimulator {
 		System.out.println("2. Pull for a Weapon");
 		System.out.println("3. Go back");
 		userChoice = Integer.parseInt(input.nextLine());
-		
+	
 		if (userChoice == 1) {
 			System.out.println("What do you want to do next?");
 			System.out.println("1. Single pull (Costs 300 resources)");
