@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public class GachaSimulator {
 	
 	private Scanner input = new Scanner(System.in); //scanner variable that takes string inputs
-	private int userChoice; //int variable for user actions 
 	private boolean isActive = false; //used in main loop
 	
 	static GachaMachine machine = new GachaMachine(); //create new gacha machine object
@@ -88,6 +87,9 @@ public class GachaSimulator {
 	
 	private void manageInventory(Player player) {
 		//lets player manage (merge, equip/unequip, level up) their characters and weapons
+		
+		int userChoice; //int variable for user actions 
+		
 		//int variables that store the index of chosen character (based on user input):
 		int charIndex1 = 0;
 		int charIndex2 = 0;
@@ -271,6 +273,7 @@ public class GachaSimulator {
 	}
 	
 	private void gacha(Player player) {
+		int userChoice; //int variable for user actions 
 		//lets player pull for a character or a weapon, provided they have the necessary resources
 		System.out.println("-------------Gacha------------");
 		boolean isActive = true;
@@ -353,6 +356,7 @@ public class GachaSimulator {
 	
 	private void actionMenu(Player player, ArrayList<Map> mapList) {
 		
+		int userChoice; //int variable for user actions 
 		System.out.println("-------------------------------------------------");
 		System.out.println("Current Resources: " + player.getResourceAmount());
 		System.out.println("-------------------------------------------------");
