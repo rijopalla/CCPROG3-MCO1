@@ -120,6 +120,7 @@ public class GachaSimulator {
 					charIndex2 = Integer.parseInt(input.nextLine()); //store index of second character
 					charIndex3 = Integer.parseInt(input.nextLine()); //store index of third character
 					
+					//check if user input is valid
 					if (charIndex1 > player.getCharInventory().size() || charIndex2 > player.getCharInventory().size() || charIndex3 > player.getCharInventory().size() ||
 						charIndex1 < player.getCharInventory().size() || charIndex2 < player.getCharInventory().size() || charIndex3 < player.getCharInventory().size()) {
 						System.out.println("Error! Out of bounds!");
@@ -165,8 +166,8 @@ public class GachaSimulator {
 						weapIndex1 = Integer.parseInt(input.nextLine()); //stores the weapon's index
 						System.out.println("Enter the number of the character you wish to equip the weapon on");
 						charIndex1 = Integer.parseInt(input.nextLine());
-						if (charIndex1 > player.getCharInventory().size() || weapIndex1 > player.getWepInventory().size() ||
-							charIndex1 < player.getCharInventory().size() || weapIndex1 < player.getWepInventory().size())
+						if (charIndex1 > player.getCharInventory().size() || weapIndex1 > player.getWepInventory().size()
+							|| charIndex1 < player.getCharInventory().size() || weapIndex1 < player.getWepInventory().size())
 							System.out.println("Error! Out of bounds!");
 						else {
 							//Equips the weapon to the corresponding character

@@ -382,5 +382,4 @@ public class Map {
 		
 		return totalResource;
 	}
-	
 }

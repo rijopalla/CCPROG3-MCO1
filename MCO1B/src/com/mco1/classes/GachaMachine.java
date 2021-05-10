@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class GachaMachine {
 	
 	//Properties 
-	
 	float pullRarity = 0; //temporary value for "chance" pull mechanic
 	int listIndex = 0 ;  //temporary value for the Arraylist index
 

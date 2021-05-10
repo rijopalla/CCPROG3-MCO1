@@ -15,7 +15,6 @@ public class Player {
 	}
 	
 	//Methods
-	
 	//Getters
 	public Character getPlayerCharacter(int index) {
 		return this.characterInventory.get(index);
