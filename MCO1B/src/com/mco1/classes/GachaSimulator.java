@@ -376,6 +376,7 @@ public class GachaSimulator {
 	
 	private void actionMenu() {
 		
+		try {
 		int userChoice; //int variable for user actions 
 		System.out.println("-------------------------------------------------");
 		System.out.println("Current Resources: " + this.player.getResourceAmount());
@@ -408,6 +409,10 @@ public class GachaSimulator {
 			isActive = false;
 		else
 			System.out.println("Error: Invalid input!");
+		}
+		catch (Exception e) {
+			System.out.println("Invalid input!");
+		}
 	}
 
 	public void start(boolean start) {
