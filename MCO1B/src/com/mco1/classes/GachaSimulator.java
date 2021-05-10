@@ -120,7 +120,8 @@ public class GachaSimulator {
 					charIndex2 = Integer.parseInt(input.nextLine()); //store index of second character
 					charIndex3 = Integer.parseInt(input.nextLine()); //store index of third character
 					
-					if (charIndex1 > player.getCharInventory().size() || charIndex2 > player.getCharInventory().size() || charIndex3 > player.getCharInventory().size()) {
+					if (charIndex1 > player.getCharInventory().size() || charIndex2 > player.getCharInventory().size() || charIndex3 > player.getCharInventory().size() ||
+						charIndex1 < player.getCharInventory().size() || charIndex2 < player.getCharInventory().size() || charIndex3 < player.getCharInventory().size()) {
 						System.out.println("Error! Out of bounds!");
 					}
 					else {
@@ -138,7 +139,7 @@ public class GachaSimulator {
 				case 2: //Level up characters
 					System.out.println("Enter the number of the character you wish to level up");
 					charIndex1 = Integer.parseInt(input.nextLine());
-					if (charIndex1 > player.getCharInventory().size())
+					if (charIndex1 > player.getCharInventory().size() || charIndex1 < player.getCharInventory().size())
 						System.out.println("Error! Out of bounds!");
 					else {
 						System.out.println("Enter the amount of resources you wish to spend (Max: 100)");
@@ -164,7 +165,8 @@ public class GachaSimulator {
 						weapIndex1 = Integer.parseInt(input.nextLine()); //stores the weapon's index
 						System.out.println("Enter the number of the character you wish to equip the weapon on");
 						charIndex1 = Integer.parseInt(input.nextLine());
-						if (charIndex1 > player.getCharInventory().size() || weapIndex1 > player.getWepInventory().size())
+						if (charIndex1 > player.getCharInventory().size() || weapIndex1 > player.getWepInventory().size() ||
+							charIndex1 < player.getCharInventory().size() || weapIndex1 < player.getWepInventory().size())
 							System.out.println("Error! Out of bounds!");
 						else {
 							//Equips the weapon to the corresponding character
@@ -185,7 +187,7 @@ public class GachaSimulator {
 						player.getPlayerCharacter(charIndex1).weaponUnequip();
 						System.out.println("Weapon unequipped!");
 					}
-					else if (charIndex1 > player.getCharInventory().size())
+					else if (charIndex1 > player.getCharInventory().size() || charIndex1 < player.getCharInventory().size())
 						System.out.println("Error! Out of bounds!");
 					else 
 						System.out.println("Error! This character doesn't have a weapon equipped!");
@@ -211,7 +213,8 @@ public class GachaSimulator {
 						weapIndex2 = Integer.parseInt(input.nextLine()); //store index of second wep
 						weapIndex3 = Integer.parseInt(input.nextLine()); //store index of third wep
 						
-						if (weapIndex1 > player.getWepInventory().size() || weapIndex2 > player.getWepInventory().size() || weapIndex3 > player.getWepInventory().size()) //check if userInput is valid
+						if (weapIndex1 > player.getWepInventory().size() || weapIndex2 > player.getWepInventory().size() || weapIndex3 > player.getWepInventory().size() ||
+							weapIndex1 < player.getWepInventory().size() || weapIndex2 < player.getWepInventory().size() || weapIndex3 < player.getWepInventory().size()) //check if userInput is valid
 							System.out.println("Error! Out of Bounds!");
 						else { //calls the merge method 
 							if (player.getPlayerWeapon(weapIndex1).mergeWeap(player.getPlayerWeapon(weapIndex2),player.getPlayerWeapon(weapIndex3))) {
@@ -227,7 +230,7 @@ public class GachaSimulator {
 					case 2: //Level up weapon
 						System.out.println("Enter the number of the weapon you wish to level up");
 						weapIndex1 = Integer.parseInt(input.nextLine());
-						if (weapIndex1 > player.getCharInventory().size())
+						if (weapIndex1 > player.getWepInventory().size() || weapIndex1 < player.getWepInventory().size())
 							System.out.println("Error! Out of bounds!");
 						else {
 							System.out.println("Enter the Amount of Resource you wish to spend");
