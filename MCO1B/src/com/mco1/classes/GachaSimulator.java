@@ -1,24 +1,23 @@
 package com.mco1.classes;
 
-
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class GachaSimulator {
 	
-	static Scanner input = new Scanner(System.in); //scanner variable that takes string inputs
-	static int userChoice; //int variable for user actions 
-	static boolean isActive = false; //used in main loop
+	private static Scanner input = new Scanner(System.in); //scanner variable that takes string inputs
+	private static int userChoice; //int variable for user actions 
+	private static boolean isActive = false; //used in main loop
 	
 	//int variables that store the index of chosen character (based on user input):
-	static int charIndex1 = 0;
-	static int charIndex2 = 0;
-	static int charIndex3 = 0;
+	private static int charIndex1 = 0;
+	private static int charIndex2 = 0;
+	private static int charIndex3 = 0;
 	
 	//int variables that store the index of chosen weapon (based on user input):
-	static int weapIndex1 = 0; 
-	static int weapIndex2 = 0; 
-	static int weapIndex3 = 0;
+	private static int weapIndex1 = 0; 
+	private static int weapIndex2 = 0; 
+	private static int weapIndex3 = 0;
 	
 	static GachaMachine machine = new GachaMachine(); //create new gacha machine object
 	
@@ -48,6 +47,9 @@ public class GachaSimulator {
 				if (player.getCharInventory().get(charIndex1).getCharacterWeapon() == null && player.getCharInventory().get(charIndex2).getCharacterWeapon() == null) {
 					System.out.println("Error: Your characters must have a weapon equipped before going on an adventure!");
 					start = false;
+				}
+				else if (charIndex1 > player.getCharInventory().size() || charIndex2 > player.getCharInventory().size()) {
+					System.out.println("Error! Out of bounds!");
 				}
 				else {
 					if (player.getCharInventory().get(charIndex1) == player.getCharInventory().get(charIndex2))
@@ -93,6 +95,7 @@ public class GachaSimulator {
 	private void manageInventory(Player player) {
 		//lets player manage (merge, equip/unequip, level up) their characters and weapons
 		boolean isRunning = true;
+		int resourceNum = 0; //stores user input for resources (used in level up)
 		while (isRunning) {
 			
 			System.out.println("---------Management-------------");
@@ -110,78 +113,86 @@ public class GachaSimulator {
 				System.out.println("5. Go back");
 				userChoice = Integer.parseInt(input.nextLine()); //take user input
 				
-				
 				switch(userChoice) {
 				case 1: //Merge characters
 					System.out.println("Enter the number of the (3) characters you wish to merge");
 					charIndex1 = Integer.parseInt(input.nextLine()); //store index of first character
 					charIndex2 = Integer.parseInt(input.nextLine()); //store index of second character
 					charIndex3 = Integer.parseInt(input.nextLine()); //store index of third character
-						
-					//calls the merge method 
-					if (player.getPlayerCharacter(charIndex1).mergeChar(player.getPlayerCharacter(charIndex2),player.getPlayerCharacter(charIndex3))) {
-						//if merging is successful, remove characters from player's inventory
-						System.out.println("Merging successful");
-						player.getCharInventory().remove(charIndex2); 
-						player.getCharInventory().remove(charIndex3-1);
-						player.displayCharInventory();
+					
+					if (charIndex1 > player.getCharInventory().size() || charIndex2 > player.getCharInventory().size() || charIndex3 > player.getCharInventory().size()) {
+						System.out.println("Error! Out of bounds!");
+					}
+					else {
+						//calls the merge method 
+						if (player.getPlayerCharacter(charIndex1).mergeChar(player.getPlayerCharacter(charIndex2),player.getPlayerCharacter(charIndex3))) {
+							//if merging is successful, remove characters from player's inventory
+							System.out.println("Merging successful");
+							player.getCharInventory().remove(charIndex2); 
+							player.getCharInventory().remove(charIndex3-1);
+							player.getCharInventory().trimToSize();
+							player.displayCharInventory();
+						}
 					}
 					break;
 				case 2: //Level up characters
 					System.out.println("Enter the number of the character you wish to level up");
 					charIndex1 = Integer.parseInt(input.nextLine());
-					System.out.println("Enter the amount of resources you wish to spend");
-					userChoice = Integer.parseInt(input.nextLine());
-					if (player.getResourceAmount() > 0 && userChoice <= player.getResourceAmount()) { //if player has any resources (>0) & userInput is within bounds
-						player.getPlayerCharacter(charIndex1).charLevelUp(userChoice); //Levels up the character based on amount of resource
-						player.subtractResource(userChoice); //player's amount of resources will be subtracted by the amount they input
-						System.out.printf("Level up! %s's level is now: %d!\n", player.getPlayerCharacter(charIndex1).getCharacterName(),
-								player.getPlayerCharacter(charIndex1).getCharacterLevel());
-						System.out.println("Current Resources: " + player.getResourceAmount()); //show player's resources
+					if (charIndex1 > player.getCharInventory().size())
+						System.out.println("Error! Out of bounds!");
+					else {
+						System.out.println("Enter the amount of resources you wish to spend (Max: 100)");
+						resourceNum = Integer.parseInt(input.nextLine());
+						//check if player has any resources (>0), userInput is within resource bounds, and character's level < maximum
+						if (player.getResourceAmount() > 0 && resourceNum <= player.getResourceAmount() && player.getPlayerCharacter(charIndex1).getCharacterLevel() < 100) { 
+							player.getPlayerCharacter(charIndex1).charLevelUp(resourceNum); //Levels up the character based on amount of resource
+							System.out.printf("Level up! %s's level is now: %d!\n", player.getPlayerCharacter(charIndex1).getCharacterName(),
+									player.getPlayerCharacter(charIndex1).getCharacterLevel());
+							player.subtractResource(resourceNum); //player's amount of resources will be subtracted by the amount they input
+							System.out.println("Current Resources: " + player.getResourceAmount()); //show player's resources
+						}
+						else if (player.getPlayerCharacter(charIndex1).getCharacterLevel() >= 100)
+							System.out.println("Character has already reached maximum level!");
+						else if (player.getResourceAmount() > 0 && resourceNum <= player.getResourceAmount())
+							System.out.println("Error: Insufficient resources!");
 					}
-					else
-						System.out.println("Error: Insufficient resources!");
 					break;
 				case 3: //Equip weapon on a character
 					player.displayWeaponInventory();
 					if(player.getCharInventory().isEmpty() == false && player.getWepInventory().isEmpty() == false) { //if player has weapons and characters:
 						System.out.println("Enter the number of the weapon you wish to equip ");
-						userChoice = Integer.parseInt(input.nextLine()); //stores the weapon's index
+						weapIndex1 = Integer.parseInt(input.nextLine()); //stores the weapon's index
 						System.out.println("Enter the number of the character you wish to equip the weapon on");
 						charIndex1 = Integer.parseInt(input.nextLine());
-						
-						//Equips the weapon to the corresponding character
-						player.getPlayerCharacter(charIndex1).weaponEquip(player.getPlayerWeapon(userChoice));
-						System.out.printf("%s is now equipped with %s!\n", player.getPlayerCharacter(charIndex1).getCharacterName(), player.getPlayerCharacter(charIndex1).getCharacterWeapon().getWeaponName());
-						break;
-					}
-					else {
-						if (player.getCharInventory().isEmpty())
-							System.out.println("You don't have any characters!");
-						else if (player.getWepInventory().isEmpty())
-							System.out.println("You don't have any weapons");
+						if (charIndex1 > player.getCharInventory().size() || weapIndex1 > player.getWepInventory().size())
+							System.out.println("Error! Out of bounds!");
+						else {
+							//Equips the weapon to the corresponding character
+							player.getPlayerCharacter(charIndex1).weaponEquip(player.getPlayerWeapon(weapIndex1));
+							System.out.printf("%s is now equipped with %s!\n", player.getPlayerCharacter(charIndex1).getCharacterName(), 
+															player.getPlayerCharacter(charIndex1).getCharacterWeapon().getWeaponName());
+						}
 					}
 					break;
 				case 4: //Unequip a weapon
-					if (player.getCharInventory().isEmpty() == false) {
-						//
-						//show player inventory
-						player.displayCharInventory();
-						//Ask for user input
-						System.out.println("Enter the number of the character with a weapon you wish to unequip: ");
-						charIndex1 = Integer.parseInt(input.nextLine());
+					//show player inventory
+					player.displayCharInventory();
+					//Ask for user input
+					System.out.println("Enter the number of the character with a weapon you wish to unequip: ");
+					charIndex1 = Integer.parseInt(input.nextLine());
+					if (player.getPlayerCharacter(charIndex1).getCharacterWeapon() != null) {
 						//unequip
 						player.getPlayerCharacter(charIndex1).weaponUnequip();
 						System.out.println("Weapon unequipped!");
-						break;
 					}
-					else {
-						System.out.println("Error: You don't have any characters");
-					}
-						
+					else if (charIndex1 > player.getCharInventory().size())
+						System.out.println("Error! Out of bounds!");
+					else 
+						System.out.println("Error! This character doesn't have a weapon equipped!");
+					break;
 				case 5:
 					break;
-				}
+					}
 				}
 				else if (userChoice == 2 && player.getWepInventory().isEmpty() == false) { //Weapon
 					System.out.println("---------Weapon Management-------------");
@@ -200,30 +211,43 @@ public class GachaSimulator {
 						weapIndex2 = Integer.parseInt(input.nextLine()); //store index of second wep
 						weapIndex3 = Integer.parseInt(input.nextLine()); //store index of third wep
 						
-						//calls the merge method 
-						if (player.getPlayerWeapon(weapIndex1).mergeWeap(player.getPlayerWeapon(weapIndex2),player.getPlayerWeapon(weapIndex3))) {
-							//if merging is successful, remove weapons from player's inventory
-							System.out.println("Merging successful");
-							player.getWepInventory().remove(weapIndex2); 
-							player.getWepInventory().remove(weapIndex3-1);
-							player.displayWeaponInventory();
+						if (weapIndex1 > player.getWepInventory().size() || weapIndex2 > player.getWepInventory().size() || weapIndex3 > player.getWepInventory().size()) //check if userInput is valid
+							System.out.println("Error! Out of Bounds!");
+						else { //calls the merge method 
+							if (player.getPlayerWeapon(weapIndex1).mergeWeap(player.getPlayerWeapon(weapIndex2),player.getPlayerWeapon(weapIndex3))) {
+								//if merging is successful, remove weapons from player's inventory
+								System.out.println("Merging successful");
+								player.getWepInventory().remove(weapIndex2); 
+								player.getWepInventory().remove(weapIndex3-1);
+								player.getWepInventory().trimToSize(); 
+								player.displayWeaponInventory();
+							}
 						}
 						break;
 					case 2: //Level up weapon
-						System.out.println("Enter the number of the weapon you wish to levelup");
+						System.out.println("Enter the number of the weapon you wish to level up");
 						weapIndex1 = Integer.parseInt(input.nextLine());
-						System.out.println("Enter the Amount of Resource you wish to spend");
-						userChoice = Integer.parseInt(input.nextLine());
-						if (player.getResourceAmount() > 0 && userChoice <= player.getResourceAmount()) { //if player has any resources (>0)
-							player.getPlayerWeapon(weapIndex1).weapLevelUp(userChoice); //Levels up the weapon based on amount of resource
-							player.subtractResource(userChoice); //player's amount of resources will be subtracted by the amount they input
-							System.out.println("Current Resources: " + player.getResourceAmount()); //show player's resources
-						}
-						else
-							System.out.println("Error: Insufficient resources!");
-						break;
-						}
+						if (weapIndex1 > player.getCharInventory().size())
+							System.out.println("Error! Out of bounds!");
+						else {
+							System.out.println("Enter the Amount of Resource you wish to spend");
+							resourceNum = Integer.parseInt(input.nextLine());
+						
+							if (player.getResourceAmount() > 0 && resourceNum <= player.getResourceAmount() && player.getPlayerWeapon(weapIndex1).getWeaponLevel() < 50) { //if player has any resources (>0) and weapon level < maximum
+								player.getPlayerWeapon(weapIndex1).weapLevelUp(resourceNum); //Levels up the weapon based on amount of resource
+								System.out.printf("Level up! %s's level is now: %d!\n", player.getPlayerWeapon(weapIndex1).getWeaponName(),
+										player.getPlayerWeapon(weapIndex1).getWeaponLevel());
+								player.subtractResource(resourceNum); //player's amount of resources will be subtracted by the amount they input
+								System.out.println("Current Resources: " + player.getResourceAmount()); //show player's resources
+							}
+							else if (player.getPlayerWeapon(weapIndex1).getWeaponLevel() >= 50)
+								System.out.println("Weapon has already reached maximum level!");
+							else if (player.getResourceAmount() > 0 && resourceNum <= player.getResourceAmount())
+								System.out.println("Error: Insufficient resources!");
+						 }
+						 break;
 					}
+				}
 				else if (userChoice == 3)
 					isRunning = false;
 				else if (player.getCharInventory().isEmpty() || player.getWepInventory().isEmpty()) {
@@ -232,10 +256,9 @@ public class GachaSimulator {
 					else
 						System.out.print("You don't have any weapons!\n");
 				}
-				else if(userChoice < 1 || userChoice > 3) {
+				if (userChoice < 1 || userChoice > 3) {
 					System.out.println("Error: Invalid input!");
-				}
-
+			}
 		}
 	}
 	
@@ -264,6 +287,7 @@ public class GachaSimulator {
 					player.addCharacter(machine.charSinglePull()); //pull for one character and add it to the player's inventory
 				    player.subtractResource(300); //subtract 300 resources from player
 				    player.displayCharInventory(); //show player's character inventory
+				    player.getWepInventory().trimToSize(); 
 				}
 				else
 					System.out.println("Error: You don't have enough resources!");
@@ -273,6 +297,7 @@ public class GachaSimulator {
 					player.getCharInventory().addAll(machine.charMultiPull()); //pull for ten characters and add it to the player's inventory
 					player.subtractResource(2700); //subtract 2700 resources from player
 					player.displayCharInventory(); //show player's character inventory
+					player.getWepInventory().trimToSize(); 
 				}
 				else
 					System.out.println("Error: You don't have enough resources!");
@@ -294,6 +319,7 @@ public class GachaSimulator {
 					player.addWeapon(machine.weapSinglePull());
 				    player.subtractResource(300); //subtract 300 resources from player
 				    player.displayWeaponInventory(); //show player's weapon inventory
+				    player.getWepInventory().trimToSize(); 
 				}
 				else
 					System.out.println("Error: You don't have enough resources!");
@@ -303,6 +329,7 @@ public class GachaSimulator {
 					player.getWepInventory().addAll(machine.weapMultiPull()); //pull for ten characters and add it to the player's inventory
 					player.subtractResource(2700); //subtract 2700 resources from player
 					player.displayWeaponInventory(); //show player's weapon inventory
+					player.getWepInventory().trimToSize(); 
 				}
 				else
 					System.out.println("Error: You don't have enough resources!");
