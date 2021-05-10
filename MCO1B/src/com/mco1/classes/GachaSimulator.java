@@ -35,19 +35,20 @@ public class GachaSimulator {
 				start = false;
 				break;
 			}
-			else
+			else {
 				System.out.println("Select two characters: ");
 				//store following input to charIndex variables
 				charIndex1 = Integer.parseInt(input.nextLine());
 				charIndex2 = Integer.parseInt(input.nextLine());
 				
+				//check if input is valid
+				if (charIndex1 > this.player.getCharInventory().size() || charIndex2 > this.player.getCharInventory().size()) {
+					System.out.println("Error! Out of bounds!");
+				}
 				//Check if both characters have weapons equipped
-				if (this.player.getCharInventory().get(charIndex1).getCharacterWeapon() == null && this.player.getCharInventory().get(charIndex2).getCharacterWeapon() == null) {
+				else if (this.player.getPlayerCharacter(charIndex1) == null || this.player.getPlayerCharacter(charIndex2).getCharacterWeapon() == null) {
 					System.out.println("Error: Your characters must have a weapon equipped before going on an adventure!");
 					start = false;
-				}
-				else if (charIndex1 > this.player.getCharInventory().size() || charIndex2 > this.player.getCharInventory().size()) {
-					System.out.println("Error! Out of bounds!");
 				}
 				else {
 					if (this.player.getCharInventory().get(charIndex1) == this.player.getCharInventory().get(charIndex2))
@@ -90,8 +91,9 @@ public class GachaSimulator {
 							continue;
 					}
 				}
-		  	}
+			}
 		}
+	 }
 	
 	private void manageInventory() {
 		//lets player manage (merge, equip/unequip, level up) their characters and weapons
@@ -298,7 +300,6 @@ public class GachaSimulator {
 		System.out.println("2. Pull for a Weapon");
 		System.out.println("3. Go back");
 		userChoice = Integer.parseInt(input.nextLine());
-		
 		
 		if (userChoice == 1) {
 			System.out.println("What do you want to do next?");
