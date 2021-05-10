@@ -172,8 +172,6 @@ public class Map {
 		float noEffect = 0;
 		float badPair = (float) -0.25;
 		
-		
-		
 		if (charElement1.equals(charElement2)) //if elements are the same:
 			multiplier = normalPair;			
 		else if (charElement1.equals("joker")) { //if the first element is joker:
@@ -353,16 +351,16 @@ public class Map {
 	
 	public int adventure(Character char1, Character char2) {
 		
-		float elementComboMultiplier = getElementComboMultiplier(char1, char2);
-		float totalFinalWeaponPower = calculateTotalFinalWeaponPower(char1.getCharacterWeapon(), char2.getCharacterWeapon());
-		float totalCharacterInfluence = calculateTotalCharacterInfluence(char1, char2);
-		float characterSuperiority = getCharacterSuperiority(char1, char2);
-		int   enemySuperiority = getEnemySuperiority();
+		float elementComboMultiplier = this.getElementComboMultiplier(char1, char2);
+		float totalFinalWeaponPower = this.calculateTotalFinalWeaponPower(char1.getCharacterWeapon(), char2.getCharacterWeapon());
+		float totalCharacterInfluence = this.calculateTotalCharacterInfluence(char1, char2);
+		float characterSuperiority = this.getCharacterSuperiority(char1, char2);
+		int   enemySuperiority = this.getEnemySuperiority();
 		int   totalResource = 0;
 		
 		totalResource = (int)(this.baseAmount + (int)(totalFinalWeaponPower/24) * (int)(totalCharacterInfluence/36)  
 						* elementComboMultiplier); //calculate total resources the player would get (based on formula given in the specs)
-		
+
 		//check if character superiority is greater than enemy superiority
 		if (characterSuperiority > enemySuperiority) {
 			//if character superiority is at least greater than 50% of enemy superiority

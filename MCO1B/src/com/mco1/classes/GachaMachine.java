@@ -83,9 +83,9 @@ public class GachaMachine {
 			listIndex = 12 + roll.nextInt(5);  //Randomizes from index 12-17	
 		}
 		
-		return new Character(characterList.get(listIndex).getCharacterName(), 
-				characterList.get(listIndex).getCharacterRarity(), 
-				characterList.get(listIndex).getCharacterElement()); //return arrayList object (new character) 
+		return new Character(characterList.get(listIndex).getCharacterName(), characterList.get(listIndex).getCharacterRarity(),
+							 characterList.get(listIndex).getCharacterElement()); //return arrayList object (new character)
+					 
 	}
 	
 	public ArrayList<Character> charMultiPull() {

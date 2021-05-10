@@ -31,8 +31,10 @@ public class GachaSimulator {
 			
 			System.out.println("Enter 'continue' to proceed with adventure");
 			System.out.println("Enter 'quit' to go back to menu");
-			if (quit.equals(input.nextLine()))
+			if (quit.equals(input.nextLine())) {
 				start = false;
+				break;
+			}
 			else
 				System.out.println("Select two characters: ");
 				//store following input to charIndex variables
