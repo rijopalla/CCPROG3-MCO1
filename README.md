@@ -1,5 +1,5 @@
 # CCPROG3 MCO1
-The main obejctive is to design a gacha simulator with the following elements:
+This is a project for the course CCPROG3, which focuses on Object-Oriented Programming using Java as the main language. The main objective is to design a gacha simulator with the following elements:
 1. A **Gacha machine** that facilitates pulling of characters and weapons
 2. **Characters** that are used to combat enemies; duplicate characters may be
 merged together so they may be refined
